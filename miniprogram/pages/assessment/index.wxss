@@ -31,7 +31,6 @@
   padding: 24rpx; 
   border-radius: var(--radius-md);
   margin-bottom: 20rpx;
-  /* 移除动画 */
 }
 
 .active-task { background: #fff; border: 2rpx solid #EEF2FF; box-shadow: var(--shadow-sm); }
@@ -49,12 +48,26 @@
 .task-reward { font-size: 24rpx; color: var(--primary); font-weight: 500; margin-top: 4rpx; }
 .text-gray { color: var(--text-sub); }
 
+/* 修改前的按钮样式 (如果需要保留旧的引用可以留着，但这里我们主要用新的) */
 .btn-action {
   background: #1F2937; color: #fff; font-size: 24rpx; 
   padding: 14rpx 32rpx; 
   border-radius: var(--radius-full);
   font-weight: 600; margin: 0;
 }
+
+/* 新增：更精致小巧的按钮样式 */
+.btn-action-sm {
+  background: #1F2937; color: #fff; 
+  font-size: 24rpx; font-weight: 600;
+  padding: 10rpx 28rpx; /* 减小内边距 */
+  border-radius: var(--radius-full);
+  line-height: 1.5; /* 确保文字垂直居中 */
+  margin: 0;
+  min-height: 0; /* 覆盖小程序按钮默认最小高度 */
+  width: auto; /* 覆盖可能的宽度 */
+}
+
 .status-badge { font-size: 22rpx; color: #9CA3AF; background: #E5E7EB; padding: 8rpx 20rpx; 
   border-radius: var(--radius-full);
 }
@@ -67,7 +80,6 @@
   display: flex; flex-direction: column;
   align-items: center; text-align: center;
   position: relative; border: 2rpx solid transparent; box-shadow: var(--shadow-sm);
-  /* 移除动画 */
 }
 
 .career-card.selected { border-color: var(--primary); background: #F5F7FF; }

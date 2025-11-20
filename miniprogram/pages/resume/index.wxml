@@ -1,71 +1,80 @@
-<view class="container" style="padding-top: calc(env(safe-area-inset-top) + 40rpx);">
-  <view class="flex-between mb-5">
-    <view>
-      <view class="title-lg">简历中心</view>
-      <view class="sub-text mt-1">打造完美职业形象</view>
+<view class="page-wrapper">
+  <view class="top-bar">
+    <view class="title-lg">简历中心</view>
+    <view class="coin-pill">
+      <text class="coin-symbol">¥</text>
+      <text class="coin-val">2,380</text>
+      <image class="avatar-xs" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"></image>
     </view>
-    <view class="icon-btn-settings">⚙️</view>
   </view>
 
-  <view class="card resume-dashboard">
-    <view class="dashboard-left">
-      <view class="progress-circle">
-        <view class="circle-inner">
-          <text class="score-num">80</text>
-          <text class="score-unit">%</text>
+  <scroll-view scroll-y class="content-scroll">
+    <view class="container">
+      
+      <view class="hero-card resume-hero">
+        <view class="hero-bg-circle"></view>
+        <view class="flex-row relative z-10">
+          <view class="progress-ring-white">
+             <view class="ring-bg">
+               <text class="score-text">80</text>
+               <text class="score-unit">%</text>
+             </view>
+          </view>
+          <view class="ml-4 text-white">
+            <view class="hero-title-md">简历完善度</view>
+            <view class="hero-desc mt-1">击败了 85% 的竞争者</view>
+            <view class="hero-link mt-2">预览 PDF ></view>
+          </view>
         </view>
       </view>
-    </view>
-    
-    <view class="dashboard-right">
-      <view class="title-md">简历完善度</view>
-      <view class="sub-text mt-1 mb-3">击败了 85% 的求职者，建议补充项目经历以提升竞争力。</view>
-      <button class="btn-outline-sm">预览 PDF</button>
-    </view>
-  </view>
 
-  <view class="flex-between mb-3">
-    <text class="title-md">我的简历</text>
-    <text class="text-primary text-sm">管理</text>
-  </view>
+      <view class="section-header flex-between mb-3">
+        <text class="title-md">我的简历</text>
+        <view class="icon-btn-sm">⚙️</view>
+      </view>
 
-  <view class="resume-grid">
-    <view class="file-card">
-      <view class="card-top">
-        <view class="file-icon">📄</view>
-        <view class="more-options">···</view>
-      </view>
-      <view class="card-bottom">
-        <view class="file-name">高级前端工程师</view>
-        <view class="update-time">2小时前更新</view>
-      </view>
-    </view>
-    
-    <view class="add-card" hover-class="add-card-hover">
-      <view class="plus-symbol">+</view>
-      <view class="add-text">新建简历</view>
-    </view>
-  </view>
+      <view class="grid-2">
+        <view class="card-grid-item">
+          <view class="flex-between w-full mb-2">
+            <view class="icon-box-sm bg-blue-light">📄</view>
+            <view class="more-dots">···</view>
+          </view>
+          <view class="item-title mt-2">高级前端...</view>
+          <view class="item-sub text-xs">2小时前更新</view>
+        </view>
 
-  <view class="card mt-4">
-    <view class="title-md mb-3">优化建议</view>
-    
-    <view class="suggestion-row warn-bg">
-      <view class="sug-icon warn-color">⚡️</view>
-      <view class="sug-content">
-        <view class="sug-title warn-text">增加量化数据</view>
-        <view class="sug-desc">HR 更关注具体的增长百分比</view>
+        <view class="card-grid-item dashed-border" hover-class="hover-bg">
+          <view class="plus-icon">+</view>
+          <view class="text-primary font-bold text-sm mt-2">新建简历</view>
+        </view>
       </view>
-      <view class="arrow warn-text">></view>
-    </view>
 
-    <view class="suggestion-row info-bg mt-2">
-      <view class="sug-icon info-color">🎓</view>
-      <view class="sug-content">
-        <view class="sug-title info-text">完善教育经历</view>
-        <view class="sug-desc">补充主修课程可提高匹配度</view>
+      <view class="section-header mt-4 mb-3">
+        <text class="title-md">优化建议</text>
       </view>
-      <view class="arrow info-text">></view>
+
+      <view class="card-item warn-style">
+        <view class="flex-row">
+          <view class="icon-mini">⚡️</view>
+          <view class="ml-2">
+            <view class="font-bold text-sm text-amber-900">增加量化数据</view>
+            <view class="text-xs text-amber-700 opacity-80">HR 偏好看到具体的增长...</view>
+          </view>
+        </view>
+        <view class="arrow-right text-amber-900">></view>
+      </view>
+      
+      <view class="card-item info-style mt-2">
+        <view class="flex-row">
+          <view class="icon-mini">🎓</view>
+          <view class="ml-2">
+            <view class="font-bold text-sm text-blue-900">完善教育经历</view>
+            <view class="text-xs text-blue-700 opacity-80">补充主修课程可提高...</view>
+          </view>
+        </view>
+        <view class="arrow-right text-blue-900">></view>
+      </view>
+
     </view>
-  </view>
+  </scroll-view>
 </view>

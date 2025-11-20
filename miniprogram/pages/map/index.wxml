@@ -1,5 +1,4 @@
-<view class="page-wrapper">
-  <!-- 统一 Top Bar -->
+<view class="page-wrapper {{isPageActive ? 'page-active' : ''}}">
   <view class="top-bar">
     <view class="title-lg">职业地图</view>
     <view class="coin-pill">
@@ -12,7 +11,6 @@
   <scroll-view scroll-y class="page-content">
     <view class="container">
       
-      <!-- 状态卡片 (改为浅色风格) -->
       <view class="card flex-between">
         <view class="flex-row">
           <view class="job-icon-box">&lt;/&gt;</view>
@@ -24,45 +22,54 @@
         <view class="icon-btn-light">✏️</view>
       </view>
 
-      <!-- 星图容器 (保留深色酷炫感，但作为卡片存在) -->
       <view class="map-card-container">
         <view class="map-header">
-          <text class="map-title">生涯星图</text>
+          <text class="map-title">能力图谱</text>
           <view class="map-legend">
             <view class="dot active"></view><text>已点亮</text>
           </view>
         </view>
 
-        <view class="galaxy-wrapper">
-          <!-- 轨道动画 -->
-          <view class="orbit orbit-1"></view>
-          <view class="orbit orbit-2"></view>
-
-          <!-- 中心恒星 -->
-          <view class="star-center">
-            <view class="star-core">&lt;/&gt;</view>
-            <view class="star-glow"></view>
+        <view class="mindmap-wrapper">
+          
+          <view class="core-center">
+            <view class="core-inner">&lt;/&gt;</view>
+            <view class="core-halo"></view>
           </view>
 
-          <!-- 行星 1 -->
-          <view class="planet-orbit-wrap p1-orbit">
-            <view class="planet-self-rotate">
-              <view class="planet-body">架</view>
-              <text class="planet-label">架构师</text>
+          <view class="branch-ray" style="transform: rotate(-35deg); --branch-length: 200rpx;">
+            <view class="branch-line" style="--branch-length: 200rpx;"></view>
+            <view class="node-item" style="--node-offset: 260rpx;">
+              <view class="node-circle">架</view>
+              <text class="node-text">架构师</text>
             </view>
           </view>
 
-          <!-- 行星 2 -->
-          <view class="planet-orbit-wrap p2-orbit">
-            <view class="planet-self-rotate-rev">
-              <view class="planet-body">全</view>
-              <text class="planet-label">全栈</text>
+          <view class="branch-ray" style="transform: rotate(145deg); --branch-length: 200rpx;">
+            <view class="branch-line" style="--branch-length: 200rpx;"></view>
+            <view class="node-item" style="--node-offset: 260rpx;">
+              <view class="node-circle">全</view>
+              <text class="node-text">全栈</text>
             </view>
           </view>
+
+          <view class="branch-ray" style="transform: rotate(210deg); --branch-length: 150rpx; opacity: 0.6;">
+             <view class="branch-line dashed" style="--branch-length: 150rpx;"></view>
+             <view class="node-item" style="--node-offset: 210rpx;">
+               <view class="node-circle small">?</view>
+             </view>
+          </view>
+
+           <view class="branch-ray" style="transform: rotate(50deg); --branch-length: 150rpx; opacity: 0.6;">
+             <view class="branch-line dashed" style="--branch-length: 150rpx;"></view>
+             <view class="node-item" style="--node-offset: 210rpx;">
+               <view class="node-circle small">?</view>
+             </view>
+          </view>
+
         </view>
       </view>
 
-      <!-- 下方可以增加路线列表 -->
       <view class="section-header mb-3 mt-4">
         <text class="title-md">下一阶段目标</text>
       </view>

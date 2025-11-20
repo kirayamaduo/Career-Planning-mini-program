@@ -1,5 +1,4 @@
-<view class="chat-page">
-  <!-- 统一 Top Bar -->
+<view class="chat-page {{isPageActive ? 'page-active' : ''}}">
   <view class="top-bar">
     <view class="title-lg">AI 助手</view>
     <view class="coin-pill">
@@ -7,9 +6,7 @@
     </view>
   </view>
 
-  <!-- 聊天内容区 -->
   <scroll-view class="chat-scroll" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation enable-back-to-top>
-    <!-- 机器人介绍 -->
     <view class="bot-profile">
       <image class="bot-avatar-lg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jessica"></image>
       <view class="bot-text">
@@ -18,7 +15,6 @@
       </view>
     </view>
 
-    <!-- 消息列表 -->
     <block wx:for="{{messages}}" wx:key="id">
       <view class="msg-row {{item.type === 'user' ? 'msg-row-reverse' : ''}}">
         <image class="avatar-sm" src="{{item.type === 'user' ? 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix' : 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jessica'}}"></image>
@@ -28,11 +24,9 @@
       </view>
     </block>
     
-    <!-- 占位符，防止被底部遮挡 -->
     <view style="height: 40rpx;"></view>
   </scroll-view>
 
-  <!-- 底部输入区 -->
   <view class="bottom-area">
     <scroll-view scroll-x class="chips-scroll" enable-flex>
       <view class="flex-row">

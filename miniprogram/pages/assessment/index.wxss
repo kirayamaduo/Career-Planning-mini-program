@@ -1,4 +1,4 @@
-/* 继承 app.wxss，补充特有样式 */
+/* 继承 app.wxss */
 
 /* Hero Card 特有样式 */
 .gradient-indigo {
@@ -12,27 +12,38 @@
 .hero-content { position: relative; z-index: 2; max-width: 65%; }
 .hero-tag { 
   background: rgba(255,255,255,0.2); backdrop-filter: blur(4px);
-  padding: 6rpx 20rpx; border-radius: 99rpx; font-size: 22rpx; 
+  padding: 6rpx 20rpx; 
+  border-radius: var(--radius-full);
+  font-size: 22rpx; 
   display: inline-block; margin-bottom: 20rpx; border: 1rpx solid rgba(255,255,255,0.1);
 }
-.hero-title { font-size: 44rpx; font-weight: 800; line-height: 1.2; margin-bottom: 16rpx; }
+.hero-title { font-size: 44rpx;
+  font-weight: 800; line-height: 1.2; margin-bottom: 16rpx; }
 .hero-desc { opacity: 0.9; font-size: 26rpx; }
 .hero-icon {
-  position: absolute; right: 40rpx; bottom: 40rpx; font-size: 100rpx;
-  animation: float 6s ease-in-out infinite;
+  position: absolute; right: 40rpx;
+  bottom: 40rpx; font-size: 100rpx;
 }
 
 /* 任务列表 */
 .task-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 24rpx; border-radius: 24rpx; margin-bottom: 20rpx;
-  transition: all 0.2s;
+  padding: 24rpx; 
+  border-radius: var(--radius-md);
+  margin-bottom: 20rpx;
+  /* 移除动画 */
 }
+
 .active-task { background: #fff; border: 2rpx solid #EEF2FF; box-shadow: var(--shadow-sm); }
 .dim-task { background: #F9FAFB; border: 2rpx solid transparent; opacity: 0.7; }
-.hover-scale { transform: scale(0.98); }
+.hover-scale { 
+  transform: scale(0.98); 
+  transition: transform 0.1s;
+}
 
-.icon-box { width: 88rpx; height: 88rpx; border-radius: 20rpx; display: flex; align-items: center; justify-content: center; font-size: 40rpx; }
+.icon-box { width: 88rpx; height: 88rpx;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center; font-size: 40rpx; }
 .gradient-indigo-light { background: #EEF2FF; color: var(--primary); }
 .gradient-green-light { background: #ECFDF5; color: var(--success); }
 .task-reward { font-size: 24rpx; color: var(--primary); font-weight: 500; margin-top: 4rpx; }
@@ -40,28 +51,36 @@
 
 .btn-action {
   background: #1F2937; color: #fff; font-size: 24rpx; 
-  padding: 14rpx 32rpx; border-radius: 99rpx; font-weight: 600; margin: 0;
+  padding: 14rpx 32rpx; 
+  border-radius: var(--radius-full);
+  font-weight: 600; margin: 0;
 }
-.status-badge { font-size: 22rpx; color: #9CA3AF; background: #E5E7EB; padding: 8rpx 20rpx; border-radius: 99rpx; }
+.status-badge { font-size: 22rpx; color: #9CA3AF; background: #E5E7EB; padding: 8rpx 20rpx; 
+  border-radius: var(--radius-full);
+}
 
 /* Grid 布局 */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24rpx; }
 .career-card {
-  background: #fff; padding: 40rpx 24rpx; border-radius: 32rpx;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: #fff; padding: 40rpx 24rpx; 
+  border-radius: var(--radius-card);
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
   position: relative; border: 2rpx solid transparent; box-shadow: var(--shadow-sm);
+  /* 移除动画 */
 }
+
 .career-card.selected { border-color: var(--primary); background: #F5F7FF; }
 .match-badge {
   position: absolute; top: 20rpx; right: 20rpx; font-size: 20rpx;
   background: #EEF2FF; color: var(--primary); padding: 4rpx 12rpx; 
-  border-radius: 8rpx; font-weight: 700;
+  border-radius: 8rpx;
+  font-weight: 700;
 }
 .match-badge.gray { background: #F3F4F6; color: #6B7280; }
-.icon-circle { width: 100rpx; height: 100rpx; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 44rpx; margin-bottom: 20rpx; }
+.icon-circle { width: 100rpx; height: 100rpx; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 44rpx; margin-bottom: 20rpx; }
 .bg-purple-light { background: #F3E8FF; color: var(--secondary); }
 .bg-blue-light { background: #DBEAFE; color: #2563EB; }
 .card-title { font-weight: 700; color: var(--text-main); font-size: 30rpx; }
 .text-primary { color: var(--primary); }
-
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15rpx); } }

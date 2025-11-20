@@ -1,15 +1,20 @@
-/* 页面布局：Flex Col */
+/* 页面布局：改为块级布局以支持 Fixed 定位 */
 .chat-page {
-  height: 100vh; display: flex; flex-direction: column;
+  height: 100vh;
   background-color: #F0F2F5;
   padding-top: 200rpx; /* 留出 Top Bar 空间 */
   box-sizing: border-box;
+  /* 移除 flex，避免与 fixed 冲突 */
+  display: block; 
 }
 
 .chat-scroll {
-  flex: 1; /* 占据剩余空间 */
+  /* 占满高度 */
+  height: 100%;
   padding: 0 32rpx;
   box-sizing: border-box;
+  /* 关键：底部留出足够的空间给固定输入栏 (输入栏约 180rpx + 安全距离) */
+  padding-bottom: 240rpx;
 }
 
 /* 机器人简介 */
@@ -19,16 +24,31 @@
   border: 6rpx solid #fff; box-shadow: var(--shadow-md); margin-bottom: 20rpx;
 }
 
-/* 消息气泡 */
+/* 消息气泡行 */
 .msg-row { display: flex; align-items: flex-end; margin-bottom: 40rpx; gap: 20rpx; }
 .msg-row-reverse { flex-direction: row-reverse; }
 
-.avatar-sm { width: 80rpx; height: 80rpx; border-radius: 24rpx; background: #fff; border: 1rpx solid rgba(0,0,0,0.05); }
+.avatar-sm { 
+  width: 80rpx; height: 80rpx; 
+  border-radius: var(--radius-md);
+  background: #fff; border: 1rpx solid rgba(0,0,0,0.05); 
+}
 
 .msg-bubble {
-  padding: 24rpx 32rpx; font-size: 30rpx; line-height: 1.6; 
+  padding: 24rpx 32rpx; font-size: 30rpx; line-height: 1.6;
   max-width: 72%; position: relative; box-shadow: var(--shadow-sm);
+  
+  /* 应用弹出动画 */
+  animation: bubblePop 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  /* 默认从左下角弹出 */
+  transform-origin: bottom left;
 }
+
+/* 用户气泡从右下角弹出 */
+.msg-row-reverse .msg-bubble {
+  transform-origin: bottom right;
+}
+
 /* 机器人：白色 */
 .bubble-bot {
   background: #FFFFFF; color: #374151;
@@ -41,9 +61,16 @@
   box-shadow: 0 8rpx 20rpx rgba(79, 70, 229, 0.25);
 }
 
-/* 底部区域 */
+/* 底部区域 - 固定定位 */
 .bottom-area {
-  background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  
+  background: rgba(255, 255, 255, 0.9); 
+  backdrop-filter: blur(20px);
   border-top: 1rpx solid rgba(0,0,0,0.05);
   padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
 }
@@ -51,14 +78,16 @@
 .chips-scroll { height: 60rpx; margin-bottom: 20rpx; white-space: nowrap; }
 .chip {
   display: inline-block; background: #F3F4F6; color: var(--primary); 
-  padding: 10rpx 28rpx; font-size: 24rpx; margin-right: 16rpx; border-radius: 99rpx;
+  padding: 10rpx 28rpx; font-size: 24rpx; margin-right: 16rpx; 
+  border-radius: var(--radius-full);
   border: 1rpx solid #EEF2FF;
 }
 
 .input-container {
   display: flex; align-items: center; gap: 20rpx;
   background: #F9FAFB; border: 1rpx solid #E5E7EB;
-  border-radius: 99rpx; padding: 12rpx 12rpx 12rpx 32rpx;
+  border-radius: var(--radius-full);
+  padding: 12rpx 12rpx 12rpx 32rpx;
 }
 .chat-input { flex: 1; height: 72rpx; font-size: 30rpx; color: #1F2937; }
 .send-btn {

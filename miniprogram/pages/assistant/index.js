@@ -1,11 +1,21 @@
 Page({
   data: {
+    isPageActive: false,
     messages: [
       { id: 1, type: 'bot', text: '你好！我是你的职业发展助手。今天想探讨什么呢？' },
     ],
     inputValue: '',
     chips: ['初级前端要求', '中级前端要求', '更多发展方向'],
     scrollTop: 0
+  },
+  
+  // 每次显示页面时触发动画
+  onShow() {
+    this.setData({ isPageActive: true });
+  },
+  // 离开时重置，确保下次进入时再次从透明滑入
+  onHide() {
+    this.setData({ isPageActive: false });
   },
 
   onInput(e) {
@@ -18,7 +28,6 @@ Page({
     this.addMessage(text, 'user');
     this.setData({ inputValue: '' });
     
-    // 模拟回复
     setTimeout(() => {
       this.addMessage(`收到！正在为您分析关于 "${text}" 的详细信息...`, 'bot');
     }, 1000);
@@ -37,7 +46,7 @@ Page({
     const messages = [...this.data.messages, newMsg];
     this.setData({ 
       messages,
-      scrollTop: messages.length * 1000 // 简单粗暴滚动到底部
+      scrollTop: messages.length * 1000
     });
   }
 })

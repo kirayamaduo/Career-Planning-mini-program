@@ -1,4 +1,4 @@
-<view class="page-wrapper">
+<view class="page-wrapper {{isPageActive ? 'page-active' : ''}}">
   <view class="top-bar">
     <view class="title-lg">简历中心</view>
     <view class="coin-pill">
@@ -11,15 +11,12 @@
   <scroll-view scroll-y class="page-content">
     <view class="container">
       
-      <!-- 全新设计的 Resume Hero Card -->
       <view class="resume-hero-card">
-        <!-- 装饰背景光斑 -->
         <view class="bg-glow glow-1"></view>
         <view class="bg-glow glow-2"></view>
 
         <view class="relative z-10">
           <view class="flex-between" style="align-items: flex-start;">
-            <!-- 左侧分数信息 -->
             <view>
               <view class="hero-label">简历评分</view>
               <view class="score-row">
@@ -31,7 +28,6 @@
               </view>
             </view>
 
-            <!-- 右侧仪表盘 (CSS Conic Gradient) -->
             <view class="dashboard-gauge">
               <view class="gauge-track"></view>
               <view class="gauge-inner">
@@ -41,10 +37,8 @@
             </view>
           </view>
 
-          <!-- 分割线 -->
           <view class="divider-line"></view>
 
-          <!-- 底部操作栏 -->
           <view class="flex-between">
             <view class="update-tip">上次更新: 10分钟前</view>
             <view class="flex-row">
@@ -61,7 +55,7 @@
       </view>
 
       <view class="grid-2">
-        <view class="card-grid-item">
+        <view class="card-grid-item" style="animation-delay: 0.4s;">
           <view class="flex-between w-full mb-2">
             <view class="icon-box-sm bg-blue-light">📄</view>
             <view class="more-dots">···</view>
@@ -70,7 +64,7 @@
           <view class="item-sub text-xs">2小时前更新</view>
         </view>
 
-        <view class="card-grid-item dashed-border" hover-class="hover-bg">
+        <view class="card-grid-item dashed-border" hover-class="hover-bg" style="animation-delay: 0.5s;">
           <view class="plus-icon">+</view>
           <view class="text-primary font-bold text-sm mt-2">新建简历</view>
         </view>
@@ -80,7 +74,7 @@
         <text class="title-md">优化建议</text>
       </view>
 
-      <view class="card-item warn-style">
+      <view class="card-item warn-style" style="animation-delay: 0.6s;">
         <view class="flex-row">
           <view class="icon-mini">⚡️</view>
           <view class="ml-2">
@@ -91,7 +85,7 @@
         <view class="arrow-right text-amber-900">></view>
       </view>
       
-      <view class="card-item info-style mt-2">
+      <view class="card-item info-style mt-2" style="animation-delay: 0.7s;">
         <view class="flex-row">
           <view class="icon-mini">🎓</view>
           <view class="ml-2">

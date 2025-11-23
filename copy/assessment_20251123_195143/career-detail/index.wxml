@@ -1,0 +1,104 @@
+<view class="detail-page">
+  <!-- Top Image Header -->
+  <view class="header-image-area">
+    <image class="header-bg" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" mode="aspectFill"></image>
+    <view class="header-overlay"></view>
+    <view class="back-btn-white" bindtap="onBack">←</view>
+    
+    <view class="header-text">
+      <view class="career-title">前端开发工程师</view>
+      <view class="career-sub">互联网 / 技术研发</view>
+    </view>
+  </view>
+
+  <view class="content-body">
+    <!-- 统计数据 -->
+    <view class="stats-row">
+      <view class="stat-item">
+        <view class="stat-val">¥28k</view>
+        <view class="stat-label">平均月薪</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-val">Top 10</view>
+        <view class="stat-label">人才紧缺度</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-val">32%</view>
+        <view class="stat-label">年增长率</view>
+      </view>
+    </view>
+
+    <!-- 技能标签 -->
+    <view class="section">
+      <view class="sec-title">核心技能</view>
+      <view class="tags-wrap">
+        <block wx:for="{{['JavaScript', 'React / Vue', '微信小程序', 'TypeScript', 'Webpack']}}" wx:key="*this">
+          <view class="skill-tag">{{item}}</view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 薪资趋势 (CSS模拟柱状图) -->
+    <view class="section">
+      <view class="sec-title">薪资晋升路径</view>
+      <view class="chart-box">
+        <view class="chart-bar-group">
+          <view class="chart-bar" style="height: 40%;"></view>
+          <text class="bar-label">初级</text>
+          <text class="bar-val">12k</text>
+        </view>
+        <view class="chart-bar-group">
+          <view class="chart-bar" style="height: 60%;"></view>
+          <text class="bar-label">中级</text>
+          <text class="bar-val">22k</text>
+        </view>
+        <view class="chart-bar-group">
+          <view class="chart-bar active" style="height: 85%;"></view>
+          <text class="bar-label">高级</text>
+          <text class="bar-val">35k</text>
+        </view>
+        <view class="chart-bar-group">
+          <view class="chart-bar" style="height: 100%;"></view>
+          <text class="bar-label">专家</text>
+          <text class="bar-val">60k+</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习路线 -->
+    <view class="section">
+      <view class="sec-title">推荐学习路线</view>
+      <view class="roadmap-item">
+        <view class="rm-circle active">1</view>
+        <view class="rm-content">
+          <view class="rm-title">HTML/CSS/JS 基础</view>
+          <view class="rm-desc">掌握网页构建的核心技术，能够还原设计稿。</view>
+        </view>
+      </view>
+      <view class="roadmap-line"></view>
+      <view class="roadmap-item">
+        <view class="rm-circle">2</view>
+        <view class="rm-content">
+          <view class="rm-title">主流框架 (Vue/React)</view>
+          <view class="rm-desc">学习组件化开发思想，处理复杂交互。</view>
+        </view>
+      </view>
+      <view class="roadmap-line"></view>
+      <view class="roadmap-item">
+        <view class="rm-circle">3</view>
+        <view class="rm-content">
+          <view class="rm-title">工程化与性能优化</view>
+          <view class="rm-desc">掌握 Webpack, Vite 构建工具，提升应用性能。</view>
+        </view>
+      </view>
+    </view>
+    
+    <view style="height: 40rpx;"></view>
+  </view>
+
+  <view class="bottom-action-bar">
+    <button class="btn-start-plan">开启学习计划</button>
+  </view>
+</view>

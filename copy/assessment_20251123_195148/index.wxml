@@ -24,30 +24,31 @@
       <view class="card">
         <view class="flex-between mb-3">
           <text class="title-md">今日任务</text>
-          <text class="sub-text font-medium">{{tasks.length}}/5</text>
+          <text class="sub-text font-medium">3/5</text>
         </view>
         
-        <view wx:if="{{isLoading}}" style="padding: 20rpx; text-align: center; color: #666; font-size: 24rpx;">加载中...</view>
-        <block wx:else>
-          <view class="task-row {{item.status === 'active' ? 'active-task' : 'dim-task'}}" 
-                hover-class="{{item.status === 'active' ? 'hover-scale' : ''}}" 
-                bindtap="handleTaskClick" 
-                data-status="{{item.status}}"
-                wx:for="{{tasks}}" 
-                wx:key="_id"
-                style="animation-delay: {{0.3 + index * 0.1}}s;">
-            <view class="flex-row">
-              <view class="icon-box {{item.status === 'active' ? 'gradient-indigo-light' : 'gradient-green-light'}}">{{item.icon}}</view>
-              <view class="ml-3">
-                <view class="text-bold {{item.status !== 'active' ? 'text-gray' : ''}}">{{item.title}}</view>
-                <view class="task-reward {{item.status !== 'active' ? 'text-gray' : ''}}">+{{item.reward}} 金币</view>
-              </view>
+        <view class="task-row active-task" hover-class="hover-scale" bindtap="goToQuizIntro" style="animation-delay: 0.3s;">
+          <view class="flex-row">
+            <view class="icon-box gradient-indigo-light">🎯</view>
+            <view class="ml-3">
+              <view class="text-bold">完成兴趣测评</view>
+              <view class="task-reward">+200 金币</view>
             </view>
-            <!-- 2. 修改后的按钮：使用新的类名 btn-action-sm -->
-            <button wx:if="{{item.status === 'active'}}" class="btn-action-sm">开始</button>
-            <view wx:else class="status-badge">待解锁</view>
           </view>
-        </block>
+          <!-- 2. 修改后的按钮：使用新的类名 btn-action-sm -->
+          <button class="btn-action-sm">开始</button>
+        </view>
+
+        <view class="task-row dim-task" style="animation-delay: 0.4s;">
+          <view class="flex-row">
+            <view class="icon-box gradient-green-light">📊</view>
+            <view class="ml-3">
+              <view class="text-bold text-gray">能力自评</view>
+              <view class="task-reward text-gray">+150 金币</view>
+            </view>
+          </view>
+          <view class="status-badge">待解锁</view>
+        </view>
       </view>
 
       <view class="flex-between mb-3 mt-2">

@@ -1,0 +1,26 @@
+<view class="quiz-page">
+  <!-- Custom NavBar -->
+  <view class="nav-header">
+    <view class="back-btn" bindtap="onBack">←</view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{((current + 1) / questions.length) * 100}}%"></view>
+    </view>
+    <view class="step-text">{{current + 1}}/{{questions.length}}</view>
+  </view>
+
+  <view class="question-container">
+    <view class="question-card">
+      <view class="q-tag">Question {{current + 1}}</view>
+      <view class="q-title">{{questions[current].title}}</view>
+      
+      <view class="options-list">
+        <block wx:for="{{questions[current].options}}" wx:key="label">
+          <view class="option-item" hover-class="option-hover" bindtap="selectOption" data-index="{{index}}">
+            <view class="opt-label">{{item.label}}</view>
+            <view class="opt-text">{{item.text}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

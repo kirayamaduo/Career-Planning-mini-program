@@ -1,43 +1,49 @@
-<view class="intro-page">
-  <!-- 背景装饰图 -->
-  <image class="bg-image" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" mode="aspectFill"></image>
-  <view class="bg-overlay"></view>
-
-  <!-- 导航栏 -->
-  <view class="nav-bar">
-    <view class="back-btn" bindtap="onBack">←</view>
+<view class="intro-container">
+  <view class="hero-section">
+    <view class="icon-wrapper">
+      <text class="hero-icon">🧬</text>
+    </view>
+    <view class="title">职业性格测评</view>
+    <view class="subtitle">基于 MBTI 与大五人格理论，AI 深度解析</view>
   </view>
 
-  <view class="content-wrapper">
-    <view class="header-section">
-      <view class="tag">AI 职业潜能分析</view>
-      <view class="title">探索你的<br/>职业基因</view>
-      <view class="desc">通过 12 道心理学维度题目，DeepCareer AI 将分析你的性格特质、能力倾向，并为你匹配最适合的职业发展路径。</view>
-    </view>
-
-    <view class="info-grid">
+  <view class="content-section">
+    <view class="info-card">
       <view class="info-item">
-        <view class="icon">⏱️</view>
-        <view class="label">预计用时</view>
-        <view class="val">3 分钟</view>
+        <view class="info-icon">⏱️</view>
+        <view class="info-text">
+          <view class="info-title">预计耗时</view>
+          <view class="info-desc">约 3-5 分钟</view>
+        </view>
       </view>
+      <view class="divider"></view>
       <view class="info-item">
-        <view class="icon">📝</view>
-        <view class="label">题目数量</view>
-        <view class="val">12 题</view>
-      </view>
-      <view class="info-item">
-        <view class="icon">✨</view>
-        <view class="label">报告维度</view>
-        <view class="val">5 维</view>
+        <view class="info-icon">📝</view>
+        <view class="info-text">
+          <view class="info-title">题目数量</view>
+          <view class="info-desc">精选 10 道核心问题</view>
+        </view>
       </view>
     </view>
 
-    <view class="tips-box">
-      <view class="tips-title">💡 测评小贴士</view>
-      <view class="tips-content">请凭借第一直觉回答，没有对错之分。真实的回答才能生成最准确的职业建议。</view>
+    <view class="guide-title">你将获得</view>
+    <view class="guide-list">
+      <view class="guide-item">
+        <text class="check-icon">✅</text>
+        <text>多维度的性格分析报告</text>
+      </view>
+      <view class="guide-item">
+        <text class="check-icon">✅</text>
+        <text>AI 推荐的匹配岗位</text>
+      </view>
+      <view class="guide-item">
+        <text class="check-icon">✅</text>
+        <text>针对性的职场发展建议</text>
+      </view>
     </view>
+  </view>
 
-    <button class="btn-start" bindtap="startQuiz">开始测评</button>
+  <view class="bottom-bar">
+    <button class="btn-primary" hover-class="btn-hover" bindtap="startQuiz">开始测评</button>
   </view>
 </view>

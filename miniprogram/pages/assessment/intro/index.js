@@ -1,16 +1,21 @@
 Page({
   data: {
-    
+
   },
 
-  onBack() {
-    wx.navigateBack();
+  onLoad(options) {
+
   },
 
   startQuiz() {
-    // 点击开始按钮，跳转到之前的 Quiz 页面
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/assessment/quiz/index',
-    })
+    }).catch(err => {
+      console.error('Failed to navigate to quiz page:', err);
+      wx.showToast({
+        title: '跳转失败，请重试',
+        icon: 'none'
+      });
+    });
   }
 })

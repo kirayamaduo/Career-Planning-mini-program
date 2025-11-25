@@ -1,167 +1,119 @@
-.quiz-container {
+.quiz-page {
+  background-color: #F3F4F6;
   min-height: 100vh;
-  background-color: #F9FAFB;
-  padding: 30rpx;
-  padding-bottom: 140rpx; /* 底部按钮空间 */
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 进度条 */
-.progress-bar-container {
+.nav-header {
+  padding: 100rpx 32rpx 20rpx;
   display: flex;
   align-items: center;
-  margin-bottom: 50rpx;
+  background: #fff;
 }
 
-.progress-track {
+.back-btn {
+  font-size: 40rpx;
+  font-weight: bold;
+  padding: 10rpx 20rpx 10rpx 0;
+}
+
+.progress-bar {
   flex: 1;
-  height: 16rpx;
-  background-color: #E5E7EB;
+  height: 12rpx;
+  background: #F3F4F6;
   border-radius: 10rpx;
+  margin: 0 24rpx;
   overflow: hidden;
-  margin-right: 20rpx;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+  background: var(--primary);
   border-radius: 10rpx;
   transition: width 0.3s ease;
 }
 
-.progress-text {
+.step-text {
   font-size: 28rpx;
+  color: #9CA3AF;
   font-weight: 600;
-  color: #6B7280;
 }
 
-.progress-text .current {
-  color: #6366F1;
-  font-size: 36rpx;
+.question-container {
+  flex: 1;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
 }
 
-/* 题目卡片 */
 .question-card {
   background: #fff;
-  border-radius: 24rpx;
-  padding: 40rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
-  animation: fadeIn 0.4s ease;
+  width: 100%;
+  border-radius: 40rpx;
+  padding: 60rpx 40rpx;
+  box-shadow: var(--shadow-lg);
+  animation: fadeInUp 0.5s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20rpx); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40rpx); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.question-title {
-  font-size: 36rpx;
+.q-tag {
+  color: var(--primary);
   font-weight: 700;
-  color: #111827;
-  margin-bottom: 40rpx;
-  line-height: 1.5;
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+  letter-spacing: 2rpx;
+  text-transform: uppercase;
 }
 
-/* 选项列表 */
-.options-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24rpx;
+.q-title {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #1F2937;
+  line-height: 1.4;
+  margin-bottom: 60rpx;
 }
 
 .option-item {
-  display: flex;
-  align-items: center;
-  padding: 30rpx;
   border: 2rpx solid #E5E7EB;
-  border-radius: 16rpx;
-  transition: all 0.2s ease;
-}
-
-.option-item:active {
-  transform: scale(0.98);
-}
-
-.option-item.selected {
-  border-color: #6366F1;
-  background-color: #EEF2FF;
-}
-
-.option-radio {
-  width: 40rpx;
-  height: 40rpx;
-  border-radius: 50%;
-  border: 2rpx solid #D1D5DB;
-  margin-right: 24rpx;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  transition: all 0.2s;
 }
 
-.option-item.selected .option-radio {
-  border-color: #6366F1;
-  background-color: #fff;
+.option-hover {
+  background: #EEF2FF;
+  border-color: var(--primary);
 }
 
-.radio-dot {
-  width: 20rpx;
-  height: 20rpx;
-  border-radius: 50%;
-  background-color: #6366F1;
-}
-
-.option-text {
-  font-size: 30rpx;
-  color: #374151;
-  line-height: 1.4;
-}
-
-.option-item.selected .option-text {
-  color: #4B5563;
-  font-weight: 500;
-}
-
-/* 底部控制栏 */
-.footer-controls {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  padding: 20rpx 30rpx calc(20rpx + env(safe-area-inset-bottom));
-  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: space-between;
-  gap: 30rpx;
-  z-index: 10;
-}
-
-.btn-nav {
-  flex: 1;
-  height: 88rpx;
-  line-height: 88rpx;
-  border-radius: 44rpx;
-  font-size: 30rpx;
-  font-weight: 600;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-prev {
+.opt-label {
+  width: 60rpx;
+  height: 60rpx;
   background: #F3F4F6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 28rpx;
   color: #4B5563;
+  margin-right: 24rpx;
 }
 
-.btn-next {
-  background: #1F2937;
+.option-hover .opt-label {
+  background: var(--primary);
   color: #fff;
 }
 
-.btn-submit {
-  background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
-  color: #fff;
-  box-shadow: 0 4rpx 12rpx rgba(99, 102, 241, 0.3);
+.opt-text {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #374151;
 }

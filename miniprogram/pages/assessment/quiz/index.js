@@ -51,6 +51,10 @@ Page({
     this.fetchQuestions();
   },
 
+  onBack() {
+    wx.navigateBack();
+  },
+
   // 选择选项
   selectOption(e) {
     if (this.data.isLoading) return;
@@ -70,6 +74,8 @@ Page({
     setTimeout(() => {
       if (currentIndex < this.data.totalQuestions - 1) {
         this.nextQuestion();
+      } else {
+        this.submitQuiz();
       }
     }, 300);
   },

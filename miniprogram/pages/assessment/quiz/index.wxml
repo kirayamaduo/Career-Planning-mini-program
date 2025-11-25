@@ -1,61 +1,29 @@
-<view class="quiz-container">
-  <!-- 顶部进度条 -->
-  <view class="progress-bar-container">
-    <view class="progress-track">
+<view class="quiz-page">
+  <!-- Custom NavBar -->
+  <view class="nav-header">
+    <view class="back-btn" bindtap="onBack">←</view>
+    <view class="progress-bar">
       <view class="progress-fill" style="width: {{progress}}%"></view>
     </view>
-    <view class="progress-text">
-      <text class="current">{{currentIndex + 1}}</text>
-      <text class="total">/{{totalQuestions}}</text>
-    </view>
+    <view class="step-text">{{currentIndex + 1}}/{{totalQuestions}}</view>
   </view>
 
-  <!-- 题目区域 -->
-  <view class="question-card">
-    <view class="question-title">{{questions[currentIndex].title}}</view>
-    
-    <view class="options-list">
-      <view 
-        class="option-item {{answers[questions[currentIndex]._id] === item.value ? 'selected' : ''}}" 
-        wx:for="{{questions[currentIndex].options}}" 
-        wx:key="value"
-        bindtap="selectOption"
-        data-value="{{item.value}}"
-      >
-        <view class="option-radio">
-          <view class="radio-dot" wx:if="{{answers[questions[currentIndex]._id] === item.value}}"></view>
-        </view>
-        <view class="option-text">{{item.label}}</view>
+  <view class="question-container">
+    <view class="question-card">
+      <view class="q-tag">Question {{currentIndex + 1}}</view>
+      <view class="q-title">{{questions[currentIndex].title}}</view>
+      
+      <view class="options-list">
+        <block wx:for="{{questions[currentIndex].options}}" wx:key="value">
+          <view class="option-item {{answers[questions[currentIndex]._id] === item.value ? 'option-hover' : ''}}" 
+                hover-class="option-hover" 
+                bindtap="selectOption" 
+                data-value="{{item.value}}">
+            <view class="opt-label">{{item.value}}</view>
+            <view class="opt-text">{{item.label}}</view>
+          </view>
+        </block>
       </view>
     </view>
-  </view>
-
-  <!-- 底部控制栏 -->
-  <view class="footer-controls">
-    <button 
-      class="btn-nav btn-prev" 
-      bindtap="prevQuestion" 
-      disabled="{{currentIndex === 0}}"
-      style="opacity: {{currentIndex === 0 ? 0.5 : 1}}"
-    >
-      上一题
-    </button>
-    
-    <button 
-      wx:if="{{currentIndex < totalQuestions - 1}}"
-      class="btn-nav btn-next" 
-      bindtap="nextQuestion"
-    >
-      下一题
-    </button>
-
-    <button 
-      wx:else
-      class="btn-nav btn-submit" 
-      bindtap="submitQuiz"
-      loading="{{isSubmitting}}"
-    >
-      提交测评
-    </button>
   </view>
 </view>

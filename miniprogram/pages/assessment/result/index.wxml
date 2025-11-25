@@ -6,70 +6,55 @@
   </view>
 
   <block wx:else>
-    <!-- 1. 结果总览卡片 -->
-    <view class="result-card">
+    <view class="result-page">
       <view class="result-header">
-        <view class="user-avatar">
-          <image src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" mode="aspectFill"></image>
-        </view>
-        <view class="result-title">您的职业性格类型</view>
-        <view class="result-type">{{report.type}}</view>
-      </view>
-      
-      <view class="tags-row">
-        <view class="tag" wx:for="{{report.tags}}" wx:key="*this">{{item}}</view>
-      </view>
-
-      <view class="score-circle">
-        <text class="score-val">{{report.score}}</text>
-        <text class="score-label">潜力指数</text>
-      </view>
-    </view>
-
-    <!-- 2. 能力维度分析 (使用条形图模拟) -->
-    <view class="section-card">
-      <view class="section-title">能力维度解析</view>
-      <view class="dimension-list">
-        <view class="dimension-item" wx:for="{{report.dimensions}}" wx:key="name">
-          <view class="dim-name">{{item.name}}</view>
-          <view class="dim-bar-bg">
-            <view class="dim-bar-fill" style="width: {{item.value}}%"></view>
+        <view class="back-btn-white" bindtap="goHome">←</view>
+        <view class="header-content">
+          <view class="score-ring">
+            <text class="score-val">{{report.score}}</text>
+            <text class="score-label">潜力指数</text>
           </view>
-          <view class="dim-val">{{item.value}}</view>
+          <view class="result-title">{{report.type}}</view>
+          <view class="result-desc">{{report.advice}}</view>
         </view>
+        <!-- 背景装饰 -->
+        <view class="bg-circle c1"></view>
+        <view class="bg-circle c2"></view>
       </view>
-    </view>
 
-    <!-- 3. 推荐岗位 -->
-    <view class="section-card">
-      <view class="section-title">推荐职业方向</view>
-      <view class="career-list">
-        <view class="career-item" 
-              wx:for="{{report.careers}}" 
-              wx:key="title"
-              bindtap="viewCareerDetail"
-              data-index="{{index}}">
-          <view class="career-header">
-            <view class="career-title">{{item.title}}</view>
-            <view class="match-badge">匹配度 {{item.match}}%</view>
+      <view class="report-card">
+        <view class="section-title">能力维度</view>
+        
+        <!-- 动态能力条形图 -->
+        <view class="skill-bars">
+          <block wx:for="{{report.dimensions}}" wx:key="name">
+            <view class="skill-row">
+              <text class="skill-name">{{item.name}}</text>
+              <view class="bar-track">
+                <view class="bar-fill" style="width: {{item.value}}%;"></view>
+              </view>
+              <text class="skill-val">{{item.value}}</text>
+            </view>
+          </block>
+        </view>
+
+        <view class="divider"></view>
+
+        <view class="section-title">推荐职业</view>
+        
+        <block wx:for="{{report.careers}}" wx:key="title">
+          <view class="job-card" bindtap="viewCareerDetail" data-index="{{index}}">
+            <view class="job-icon">💼</view>
+            <view class="job-info">
+              <view class="job-name">{{item.title}}</view>
+              <view class="job-salary">匹配度 {{item.match}}%</view>
+            </view>
+            <view class="job-arrow">→</view>
           </view>
-          <view class="career-desc">{{item.desc}}</view>
-          <view class="career-arrow">></view>
-        </view>
-      </view>
-    </view>
+        </block>
 
-    <!-- 4. 发展建议 -->
-    <view class="section-card advice-card">
-      <view class="section-title">AI 发展建议</view>
-      <view class="advice-content">
-        <text class="quote-icon">“</text>
-        {{report.advice}}
+        <button class="btn-save" bindtap="goHome">返回测评首页</button>
       </view>
-    </view>
-
-    <view class="footer-action">
-      <button class="btn-home" bindtap="goHome">返回测评首页</button>
     </view>
   </block>
 </view>

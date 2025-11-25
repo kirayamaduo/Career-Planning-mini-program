@@ -20,6 +20,10 @@ Page({
     }
   },
 
+  onBack() {
+    wx.navigateBack();
+  },
+
   startQuiz() {
     const url = this.data.id 
       ? `/pages/assessment/quiz/index?id=${this.data.id}`

@@ -1,7 +1,7 @@
 .diagnosis-page {
   min-height: 100vh;
   background: linear-gradient(180deg, #6366F1 0%, #F5F5F7 30%);
-  padding-bottom: 120rpx;
+  padding-bottom: 90rpx;
 }
 
 /* 加载状态 */
@@ -87,7 +87,7 @@
 
 /* 内容区域 */
 .content-container {
-  padding: 40rpx 30rpx;
+  padding: 100rpx 40rpx;
 }
 
 /* 评分卡片 */
@@ -209,11 +209,11 @@
 .suggestions-list {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
+  gap: 30rpx;
 }
 
 .suggestion-card {
-  border-radius: 16rpx;
+  border-radius: 50rpx;
   padding: 30rpx;
   transition: all 0.3s;
 }
@@ -229,7 +229,7 @@
 .suggestion-header {
   display: flex;
   align-items: center;
-  gap: 20rpx;
+  gap: 50rpx;
 }
 
 .suggestion-icon {
@@ -280,8 +280,8 @@
   border-radius: 44rpx;
   font-size: 32rpx;
   font-weight: bold;
-  padding: 0;
-  margin: 0;
+  padding: 30rpx;
+  margin: 24rpx;
   display: flex;
   align-items: center;
   justify-content: center;

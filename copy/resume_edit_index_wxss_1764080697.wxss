@@ -49,7 +49,7 @@
 
 .form-container {
   padding: 30rpx;
-  padding-top: 60rpx;
+  padding-top: 40rpx;
 }
 
 /* Section块 */
@@ -309,7 +309,7 @@
 
 /* 底部占位 */
 .bottom-placeholder {
-  height: 200rpx;
+  height: 120rpx;
 }
 
 /* 自定义爱好输入 */

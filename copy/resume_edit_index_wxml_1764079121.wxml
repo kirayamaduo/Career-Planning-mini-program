@@ -238,27 +238,12 @@
         </view>
 
         <view class="hobby-tags">
-          <!-- 预设选项 -->
           <view wx:for="{{hobbyOptions}}" wx:key="item" 
                 class="hobby-tag {{resumeData.hobbies.indexOf(item) > -1 ? 'active' : ''}}" 
                 bindtap="toggleHobby" 
                 data-hobby="{{item}}">
             {{item}}
           </view>
-          <!-- 自定义爱好显示 -->
-          <view wx:for="{{customHobbies}}" wx:key="item" 
-                class="hobby-tag active custom" 
-                bindtap="deleteCustomHobby" 
-                data-hobby="{{item}}">
-            {{item}}
-            <view class="hobby-delete">×</view>
-          </view>
-        </view>
-
-        <!-- 自定义输入框 -->
-        <view class="custom-hobby-input">
-          <input class="form-input" placeholder="输入自定义爱好" value="{{customHobbyInput}}" bindinput="handleCustomHobbyInput" />
-          <view class="add-hobby-btn" bindtap="addCustomHobby">+</view>
         </view>
       </view>
 

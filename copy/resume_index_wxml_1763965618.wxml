@@ -1,0 +1,81 @@
+<view class="page-container">
+  <!-- 1. 自定义导航栏 (Fixed) -->
+  <view class="custom-nav" style="height: {{navHeight}}px; padding-top: {{statusBarHeight}}px;">
+    <view class="top-bar" style="height: {{navHeight - statusBarHeight}}px;">
+      <view class="page-title">简历优化</view>
+      <view class="coin-pill">
+        <text class="coin-symbol">¥</text>
+        <text class="coin-val">2,380</text>
+        <image class="avatar-xs" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 内容滚动区 (使用 margin-top 避开导航栏) -->
+  <view class="scroll-content" style="margin-top: {{navHeight}}px;">
+    <!-- Slogan -->
+    <view class="slogan-section">
+      <view class="slogan-badge">AI 驱动</view>
+      <view class="slogan-title">让简历成为面试通行证</view>
+      <view class="slogan-sub">基于百万份优质简历训练，3秒精准诊断</view>
+    </view>
+
+    <!-- 操作区 -->
+    <view class="action-wrapper">
+      <view class="action-card primary" bindtap="handlePaste">
+        <view class="card-info">
+          <view class="card-title">粘贴简历文本</view>
+          <view class="card-desc">直接粘贴内容，快速获取 AI 评分</view>
+        </view>
+        <view class="icon-circle">
+          <text>✍️</text>
+        </view>
+      </view>
+
+      <view class="action-card secondary" bindtap="handleUpload">
+        <view class="card-info">
+          <view class="card-title">上传简历文件</view>
+          <view class="card-desc">支持 PDF、Word、图片格式</view>
+        </view>
+        <view class="icon-circle blue">
+          <text>📄</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能区 -->
+    <view class="feature-section">
+      <view class="section-header">AI 优化引擎能力</view>
+      <view class="feature-grid-2x2">
+        <view class="feature-big-card">
+          <view class="feature-icon-box bg-purple">🔍</view>
+          <view class="feature-content">
+            <view class="feature-name">ATS 筛选模拟</view>
+            <view class="feature-desc">模拟大厂筛选算法</view>
+          </view>
+        </view>
+        <view class="feature-big-card">
+          <view class="feature-icon-box bg-orange">✨</view>
+          <view class="feature-content">
+            <view class="feature-name">智能润色</view>
+            <view class="feature-desc">专业词汇自动替换</view>
+          </view>
+        </view>
+        <view class="feature-big-card">
+          <view class="feature-icon-box bg-blue">⚖️</view>
+          <view class="feature-content">
+            <view class="feature-name">排版建议</view>
+            <view class="feature-desc">结构化布局优化</view>
+          </view>
+        </view>
+        <view class="feature-big-card">
+          <view class="feature-icon-box bg-green">🎯</view>
+          <view class="feature-content">
+            <view class="feature-name">岗位匹配</view>
+            <view class="feature-desc">精准度打分分析</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

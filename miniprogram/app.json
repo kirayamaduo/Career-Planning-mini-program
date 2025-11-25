@@ -8,6 +8,7 @@
     "pages/map/index",
     "pages/assistant/index",
     "pages/resume/index",
+    "pages/resume/edit/index",
     "pages/interview/index"
   ],
   "window": {

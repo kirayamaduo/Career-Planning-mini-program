@@ -1,0 +1,69 @@
+<view class="page-wrapper {{isPageActive ? 'page-active' : ''}}">
+  <view class="top-bar">
+    <view class="title-lg">面试演练</view>
+    <view class="coin-pill">
+      <text class="coin-symbol">¥</text>
+      <text class="coin-val">2,380</text>
+      <image class="avatar-xs" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"></image>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content">
+    <view class="container">
+      
+      <view class="hero-card-base gradient-dark">
+        <view class="hero-bg-overlay"></view>
+        <view class="hero-content relative z-10">
+          <view class="flex-between mb-3">
+            <view class="hero-tag-red">LIVE</view>
+            <view class="hero-time">30分钟后开始</view>
+          </view>
+          
+          <view class="flex-row mb-3">
+            <view class="company-logo-lg">
+              <text style="font-size: 48rpx;">🎵</text>
+            </view>
+            <view class="ml-3">
+              <view class="title-md text-white">字节跳动</view>
+              <view class="sub-text text-white opacity-80">前端开发工程师 • 视频面试</view>
+            </view>
+          </view>
+
+          <button class="btn-hero-action">进入面试间</button>
+        </view>
+      </view>
+
+      <view class="flex-between mb-3 mt-4">
+        <text class="title-md">明日日程</text>
+        <text class="text-primary text-xs">全部日程 ></text>
+      </view>
+
+      <view class="list-card" hover-class="hover-scale" style="animation-delay: 0.3s;">
+        <view class="flex-row">
+          <view class="icon-box bg-orange-light">
+            <text>🛍️</text>
+          </view>
+          <view class="ml-3">
+            <view class="item-title">阿里巴巴</view>
+            <view class="sub-text">高级前端专家</view>
+          </view>
+        </view>
+        <view class="time-badge">14:00</view>
+      </view>
+
+      <view class="list-card" hover-class="hover-scale" style="animation-delay: 0.4s;">
+        <view class="flex-row">
+          <view class="icon-box bg-blue-light">
+            <text>☁️</text>
+          </view>
+          <view class="ml-3">
+            <view class="item-title">腾讯云</view>
+            <view class="sub-text">全栈工程师</view>
+          </view>
+        </view>
+        <view class="time-badge">16:30</view>
+      </view>
+
+    </view>
+  </scroll-view>
+</view>

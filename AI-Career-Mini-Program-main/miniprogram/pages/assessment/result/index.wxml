@@ -1,0 +1,63 @@
+<view class="result-page">
+  <view class="result-header">
+    <view class="back-btn-white" bindtap="onBack">←</view>
+    <view class="header-content">
+      <view class="score-ring">
+        <text class="score-val">92</text>
+        <text class="score-label">匹配度</text>
+      </view>
+      <view class="result-title">INTJ - 建筑师型</view>
+      <view class="result-desc">你具有独特的战略眼光和强大的逻辑思维能力。</view>
+    </view>
+    <!-- 背景装饰 -->
+    <view class="bg-circle c1"></view>
+    <view class="bg-circle c2"></view>
+  </view>
+
+  <view class="report-card">
+    <view class="section-title">能力维度</view>
+    
+    <!-- 简易能力条形图 -->
+    <view class="skill-bars">
+      <view class="skill-row">
+        <text class="skill-name">逻辑分析</text>
+        <view class="bar-track"><view class="bar-fill" style="width: 90%;"></view></view>
+        <text class="skill-val">9.0</text>
+      </view>
+      <view class="skill-row">
+        <text class="skill-name">创意设计</text>
+        <view class="bar-track"><view class="bar-fill warning" style="width: 75%;"></view></view>
+        <text class="skill-val">7.5</text>
+      </view>
+      <view class="skill-row">
+        <text class="skill-name">团队协作</text>
+        <view class="bar-track"><view class="bar-fill success" style="width: 85%;"></view></view>
+        <text class="skill-val">8.5</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="section-title">推荐职业</view>
+    
+    <view class="job-card" bindtap="goToDetail">
+      <view class="job-icon">💻</view>
+      <view class="job-info">
+        <view class="job-name">高级前端工程师</view>
+        <view class="job-salary">¥25k - 45k</view>
+      </view>
+      <view class="job-arrow">→</view>
+    </view>
+
+    <view class="job-card" bindtap="goToDetail">
+      <view class="job-icon">📈</view>
+      <view class="job-info">
+        <view class="job-name">数据分析专家</view>
+        <view class="job-salary">¥30k - 50k</view>
+      </view>
+      <view class="job-arrow">→</view>
+    </view>
+
+    <button class="btn-save" bindtap="onBack">保存完整报告</button>
+  </view>
+</view>

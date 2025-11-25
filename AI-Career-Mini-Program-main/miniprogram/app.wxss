@@ -1,0 +1,136 @@
+/** app.wxss **/
+page {
+  /* --- 核心色板 (Indigo Theme) --- */
+  --primary: #6366F1;
+  --primary-hover: #4F46E5;
+  --primary-light: #EEF2FF;
+  --secondary: #8B5CF6;
+  
+  /* --- 辅助色 --- */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* --- 中性色 --- */
+  --text-main: #111827;
+  --text-sub: #6B7280;
+  --bg-page: #F3F4F6;
+  --bg-card: #FFFFFF;
+  --border: #E5E7EB;
+
+  /* --- 阴影系统 --- */
+  --shadow-sm: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  --shadow-md: 0 8rpx 24rpx rgba(0,0,0,0.06);
+  --shadow-lg: 0 16rpx 40rpx rgba(99, 102, 241, 0.12);
+
+  /* --- 统一圆角系统 --- */
+  --radius-card: 32rpx;
+  --radius-md: 24rpx;
+  --radius-sm: 16rpx;
+  --radius-full: 99rpx;
+
+  /* --- 基础设置 --- */
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+  box-sizing: border-box;
+  --safe-bottom: env(safe-area-inset-bottom);
+  --top-bar-height: 200rpx;
+}
+
+/* --- 通用容器 --- */
+.container {
+  padding: 32rpx;
+  padding-bottom: calc(40rpx + var(--safe-bottom));
+}
+
+/* --- Top Bar --- */
+.top-bar {
+  padding: 100rpx 32rpx 20rpx;
+  background: rgba(243, 244, 246, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  padding-right: 220rpx; 
+  box-sizing: border-box;
+}
+
+.page-content {
+  padding-top: var(--top-bar-height);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.coin-pill {
+  background: #FFF7ED; padding: 6rpx 12rpx 6rpx 8rpx; border-radius: 99rpx;
+  display: flex; align-items: center;
+  gap: 10rpx; border: 2rpx solid #FFEDD5;
+  margin-left: 20rpx; 
+  margin-top: 4rpx;
+  flex-shrink: 0;
+}
+
+.coin-symbol { color: #D97706; font-weight: 800; font-size: 24rpx; margin-left: 4rpx; }
+.coin-val { color: #92400E; font-weight: 700; font-size: 24rpx; }
+.avatar-xs { width: 44rpx; height: 44rpx; border-radius: 50%; border: 2rpx solid #fff; background: #E5E7EB; }
+
+/* --- 文本排版 --- */
+.title-lg { 
+  font-size: 44rpx; 
+  font-weight: 800; 
+  color: var(--text-main); 
+  line-height: 1;
+  white-space: nowrap;
+}
+.title-md { font-size: 34rpx; font-weight: 700; color: var(--text-main); line-height: 1.4; }
+.text-bold { font-weight: 700; }
+.sub-text { font-size: 26rpx; color: var(--text-sub); line-height: 1.4; }
+.text-xs { font-size: 22rpx; }
+
+/* --- 通用组件 --- */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 32rpx; margin-bottom: 32rpx;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Hero Card 基类 */
+.hero-card-base {
+  border-radius: var(--radius-card);
+  padding: 48rpx; position: relative; overflow: hidden;
+  margin-bottom: 40rpx; box-shadow: var(--shadow-lg);
+  color: white;
+  min-height: 240rpx;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+/* Flex Utilities */
+.flex-row { display: flex; align-items: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.ml-2 { margin-left: 16rpx; }
+.ml-3 { margin-left: 24rpx; }
+.mt-2 { margin-top: 16rpx; }
+.mt-4 { margin-top: 32rpx; }
+.mb-2 { margin-bottom: 16rpx; }
+.mb-3 { margin-bottom: 24rpx; }
+.w-full { width: 100%; }
+
+/* --- 循环动画 --- */
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.15); opacity: 0.5; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8rpx); }
+}
+
+/* --- 新增：气泡弹出动画 --- */
+@keyframes bubblePop {
+  0% { opacity: 0; transform: scale(0.9) translateY(10rpx); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}

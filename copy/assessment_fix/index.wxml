@@ -1,0 +1,75 @@
+<view class="page-wrapper {{isPageActive ? 'page-active' : ''}}">
+  <view class="top-bar">
+    <view class="title-lg">职业测评</view>
+    <view class="coin-pill">
+      <text class="coin-symbol">¥</text>
+      <text class="coin-val">2,380</text>
+      <image class="avatar-xs" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"></image>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content">
+    <view class="container">
+      <!-- 1. 添加了 bindtap 跳转到介绍页 -->
+      <view class="hero-card-base gradient-indigo" bindtap="goToQuizIntro">
+        <view class="hero-bg-deco"></view>
+        <view class="hero-content">
+          <view class="hero-tag">AI 驱动</view>
+          <view class="hero-title">3分钟定位你的<br/>职业基因</view>
+          <view class="hero-desc">探索天赋，精准匹配未来方向</view>
+        </view>
+        <view class="hero-icon">🚀</view>
+      </view>
+
+      <view class="card">
+        <view class="flex-between mb-3">
+          <text class="title-md">今日任务</text>
+          <text class="sub-text font-medium">{{tasks.length}}/5</text>
+        </view>
+        
+        <view wx:if="{{isLoading}}" style="padding: 20rpx; text-align: center; color: #666; font-size: 24rpx;">加载中...</view>
+        <block wx:else>
+          <view class="task-row {{item.status === 'active' ? 'active-task' : 'dim-task'}}" 
+                hover-class="{{item.status === 'active' ? 'hover-scale' : ''}}" 
+                bindtap="handleTaskClick" 
+                data-status="{{item.status}}"
+                wx:for="{{tasks}}" 
+                wx:key="_id"
+                style="animation-delay: {{0.3 + index * 0.1}}s;">
+            <view class="flex-row">
+              <view class="icon-box {{item.status === 'active' ? 'gradient-indigo-light' : 'gradient-green-light'}}">{{item.icon}}</view>
+              <view class="ml-3">
+                <view class="text-bold {{item.status !== 'active' ? 'text-gray' : ''}}">{{item.title}}</view>
+                <view class="task-reward {{item.status !== 'active' ? 'text-gray' : ''}}">+{{item.reward}} 金币</view>
+              </view>
+            </view>
+            <!-- 2. 修改后的按钮：使用新的类名 btn-action-sm -->
+            <button wx:if="{{item.status === 'active'}}" class="btn-action-sm">开始</button>
+            <view wx:else class="status-badge">待解锁</view>
+          </view>
+        </block>
+      </view>
+
+      <view class="flex-between mb-3 mt-2">
+        <text class="title-md">推荐方向</text>
+        <text class="text-primary text-xs font-bold">全部 ></text>
+      </view>
+      
+      <view class="grid-2">
+        <view class="career-card selected" bindtap="goToDetail" style="animation-delay: 0.5s;">
+          <view class="match-badge">92% 匹配</view>
+          <view class="icon-circle bg-purple-light">💻</view>
+          <view class="card-title">前端开发</view>
+          <view class="sub-text text-xs mt-2">高薪 • 热门</view>
+        </view>
+         
+        <view class="career-card" bindtap="goToDetail" style="animation-delay: 0.6s;">
+          <view class="match-badge gray">85% 匹配</view>
+          <view class="icon-circle bg-blue-light">🎨</view>
+          <view class="card-title">UI 设计师</view>
+          <view class="sub-text text-xs mt-2">创意 • 灵活</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

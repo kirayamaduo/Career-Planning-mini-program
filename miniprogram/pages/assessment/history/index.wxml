@@ -1,0 +1,39 @@
+<view class="history-page">
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="onBack">←</view>
+    <view class="page-title">测评记录</view>
+  </view>
+
+  <scroll-view scroll-y class="history-list">
+    <block wx:if="{{historyList.length > 0}}">
+      <view class="history-card" wx:for="{{historyList}}" wx:key="id" bindtap="goToResult" data-id="{{item.id}}">
+        <view class="card-header">
+          <view class="tag {{item.type === 'mbti' ? 'tag-purple' : 'tag-blue'}}">{{item.tagName}}</view>
+          <view class="date">{{item.date}}</view>
+        </view>
+        
+        <view class="card-body">
+          <view class="result-main">{{item.resultTitle}}</view>
+          <view class="result-sub">{{item.desc}}</view>
+        </view>
+
+        <view class="card-footer">
+          <view class="score-box">
+            <text class="score-num">{{item.score}}</text>
+            <text class="score-label">匹配度</text>
+          </view>
+          <view class="action-btn">查看报告 ></view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view wx:else class="g-empty-box">
+      <view class="g-empty-icon">📂</view>
+      <view class="g-empty-text">暂无测评记录</view>
+      <button class="btn-go-test" bindtap="goTest" style="margin-top: 30rpx;">去测评</button>
+    </view>
+    
+    <view class="bottom-space"></view>
+  </scroll-view>
+</view>

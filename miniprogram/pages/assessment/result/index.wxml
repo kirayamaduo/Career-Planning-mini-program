@@ -1,7 +1,7 @@
 <view class="container">
   <!-- Loading 状态 -->
-  <view wx:if="{{isLoading}}" class="loading-box">
-    <view class="loading-spinner"></view>
+  <view wx:if="{{isLoading}}" class="g-loading-box">
+    <view class="g-loading-spinner"></view>
     <view class="loading-text">AI 正在生成分析报告...</view>
   </view>
 
@@ -9,6 +9,9 @@
     <view class="result-page">
       <view class="result-header">
         <view class="back-btn-white" bindtap="goHome">←</view>
+        <!-- 分享按钮 (新增) -->
+        <view class="share-btn-white" bindtap="showShareModal">分享</view>
+
         <view class="header-content">
           <view class="score-ring">
             <text class="score-val">{{report.score}}</text>
@@ -54,6 +57,27 @@
         </block>
 
         <button class="btn-save" bindtap="goHome">返回测评首页</button>
+      </view>
+    </view>
+
+    <!-- 分享海报弹窗 (Mock UI) -->
+    <view class="modal-mask" wx:if="{{showShare}}" bindtap="hideShareModal">
+      <view class="share-modal" catchtap="stopProp">
+        <view class="poster-preview">
+          <view class="poster-header">
+            <view class="poster-title">我的职业基因</view>
+            <view class="poster-type">{{report.type}}</view>
+          </view>
+          <view class="poster-radar-mock">
+            <view class="radar-circle"></view>
+            <text>AI 深度解析</text>
+          </view>
+          <view class="poster-footer">
+            <view class="qr-mock"></view>
+            <text class="qr-tip">长按识别测试</text>
+          </view>
+        </view>
+        <button class="btn-save-image" bindtap="saveImageMock">保存到相册</button>
       </view>
     </view>
   </block>

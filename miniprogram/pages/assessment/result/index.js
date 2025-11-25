@@ -1,7 +1,8 @@
 Page({
   data: {
     report: null,
-    isLoading: true
+    isLoading: true,
+    showShare: false // 控制分享弹窗
   },
 
   onLoad(options) {
@@ -101,6 +102,29 @@ Page({
     }, 1000);
   },
 
+  // 分享相关逻辑
+  showShareModal() {
+    this.setData({ showShare: true });
+  },
+
+  hideShareModal() {
+    this.setData({ showShare: false });
+  },
+  
+  stopProp() {},
+
+  saveImageMock() {
+    wx.showLoading({ title: '保存中...' });
+    setTimeout(() => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '已保存到相册',
+        icon: 'success'
+      });
+      this.hideShareModal();
+    }, 1000);
+  },
+
   // 返回首页
   goHome() {
     wx.reLaunch({
@@ -108,12 +132,24 @@ Page({
     });
   },
 
-  // 查看岗位详情 (暂未实现)
+  // 查看岗位详情
   viewCareerDetail(e) {
     const index = e.currentTarget.dataset.index;
-    wx.showToast({
-      title: '查看详情: ' + this.data.report.careers[index].title,
-      icon: 'none'
+    const career = this.data.report.careers[index];
+    
+    // 简单的映射逻辑：如果标题包含"前端"，跳转到 frontend
+    // 真实场景下，AI 应该返回 career_code
+    let code = '';
+    if (career.title.includes('前端')) {
+      code = 'frontend';
+    } else {
+      // 默认跳转，或提示暂无详情
+      // 这里为了演示体验，如果不是前端，暂时也都跳到 frontend (或者您可以再录入一条后端数据)
+      code = 'frontend'; 
+    }
+
+    wx.navigateTo({
+      url: `/pages/assessment/career-detail/index?id=${code}`,
     });
   }
 })

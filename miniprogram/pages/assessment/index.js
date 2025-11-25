@@ -75,5 +75,11 @@ Page({
     wx.navigateTo({
       url: '/pages/assessment/career-detail/index?id=frontend',
     })
+  },
+
+  goToHistory() {
+    wx.navigateTo({
+      url: '/pages/assessment/history/index',
+    })
   }
 })

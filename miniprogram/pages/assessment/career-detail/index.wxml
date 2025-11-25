@@ -1,4 +1,4 @@
-<view class="detail-page">
+<view class="detail-page" wx:if="{{!isLoading && career}}">
   <!-- Top Image Header -->
   <view class="header-image-area">
     <image class="header-bg" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" mode="aspectFill"></image>
@@ -6,8 +6,8 @@
     <view class="back-btn-white" bindtap="onBack">←</view>
     
     <view class="header-text">
-      <view class="career-title">前端开发工程师</view>
-      <view class="career-sub">互联网 / 技术研发</view>
+      <view class="career-title">{{career.title}}</view>
+      <view class="career-sub">{{career.category}}</view>
     </view>
   </view>
 
@@ -15,17 +15,17 @@
     <!-- 统计数据 -->
     <view class="stats-row">
       <view class="stat-item">
-        <view class="stat-val">¥28k</view>
+        <view class="stat-val">{{career.stats.avg_salary}}</view>
         <view class="stat-label">平均月薪</view>
       </view>
       <view class="stat-divider"></view>
       <view class="stat-item">
-        <view class="stat-val">Top 10</view>
+        <view class="stat-val">{{career.stats.talent_scarcity}}</view>
         <view class="stat-label">人才紧缺度</view>
       </view>
       <view class="stat-divider"></view>
       <view class="stat-item">
-        <view class="stat-val">32%</view>
+        <view class="stat-val">{{career.stats.growth_rate}}</view>
         <view class="stat-label">年增长率</view>
       </view>
     </view>
@@ -34,71 +34,58 @@
     <view class="section">
       <view class="sec-title">核心技能</view>
       <view class="tags-wrap">
-        <block wx:for="{{['JavaScript', 'React / Vue', '微信小程序', 'TypeScript', 'Webpack']}}" wx:key="*this">
+        <block wx:for="{{career.tags}}" wx:key="*this">
           <view class="skill-tag">{{item}}</view>
         </block>
       </view>
     </view>
 
-    <!-- 薪资趋势 (CSS模拟柱状图) -->
-    <view class="section">
+    <!-- 薪资趋势 (动态渲染) -->
+    <view class="section" wx:if="{{career.salary_growth && career.salary_growth.length > 0}}">
       <view class="sec-title">薪资晋升路径</view>
       <view class="chart-box">
-        <view class="chart-bar-group">
-          <view class="chart-bar" style="height: 40%;"></view>
-          <text class="bar-label">初级</text>
-          <text class="bar-val">12k</text>
-        </view>
-        <view class="chart-bar-group">
-          <view class="chart-bar" style="height: 60%;"></view>
-          <text class="bar-label">中级</text>
-          <text class="bar-val">22k</text>
-        </view>
-        <view class="chart-bar-group">
-          <view class="chart-bar active" style="height: 85%;"></view>
-          <text class="bar-label">高级</text>
-          <text class="bar-val">35k</text>
-        </view>
-        <view class="chart-bar-group">
-          <view class="chart-bar" style="height: 100%;"></view>
-          <text class="bar-label">专家</text>
-          <text class="bar-val">60k+</text>
-        </view>
+        <block wx:for="{{career.salary_growth}}" wx:key="level">
+          <view class="chart-bar-group">
+            <view class="chart-bar {{index === 2 ? 'active' : ''}}" style="height: {{item.height}};"></view>
+            <text class="bar-label">{{item.level}}</text>
+            <text class="bar-val">{{item.salary}}</text>
+          </view>
+        </block>
       </view>
     </view>
 
     <!-- 学习路线 -->
-    <view class="section">
+    <view class="section" wx:if="{{career.roadmap && career.roadmap.length > 0}}">
       <view class="sec-title">推荐学习路线</view>
-      <view class="roadmap-item">
-        <view class="rm-circle active">1</view>
-        <view class="rm-content">
-          <view class="rm-title">HTML/CSS/JS 基础</view>
-          <view class="rm-desc">掌握网页构建的核心技术，能够还原设计稿。</view>
+      <block wx:for="{{career.roadmap}}" wx:key="step">
+        <view class="roadmap-item">
+          <view class="rm-circle {{index === 0 ? 'active' : ''}}">{{item.step}}</view>
+          <view class="rm-content">
+            <view class="rm-title">{{item.title}}</view>
+            <view class="rm-desc">{{item.desc}}</view>
+          </view>
         </view>
-      </view>
-      <view class="roadmap-line"></view>
-      <view class="roadmap-item">
-        <view class="rm-circle">2</view>
-        <view class="rm-content">
-          <view class="rm-title">主流框架 (Vue/React)</view>
-          <view class="rm-desc">学习组件化开发思想，处理复杂交互。</view>
-        </view>
-      </view>
-      <view class="roadmap-line"></view>
-      <view class="roadmap-item">
-        <view class="rm-circle">3</view>
-        <view class="rm-content">
-          <view class="rm-title">工程化与性能优化</view>
-          <view class="rm-desc">掌握 Webpack, Vite 构建工具，提升应用性能。</view>
-        </view>
-      </view>
+        <!-- 最后一项不显示连接线 -->
+        <view class="roadmap-line" wx:if="{{index < career.roadmap.length - 1}}"></view>
+      </block>
     </view>
     
     <view style="height: 40rpx;"></view>
   </view>
 
   <view class="bottom-action-bar">
-    <button class="btn-start-plan">开启学习计划</button>
+    <button class="btn-start-plan" bindtap="startPlan">开启学习计划</button>
   </view>
+</view>
+
+<!-- Loading / Error State -->
+<view wx:if="{{isLoading}}" class="g-loading-box">
+  <view class="g-loading-spinner"></view>
+  <view>加载中...</view>
+</view>
+
+<view wx:if="{{!isLoading && !career}}" class="g-empty-box">
+  <view class="g-empty-icon">📄</view>
+  <view class="g-empty-text">{{errorMsg || '暂无数据'}}</view>
+  <button bindtap="onBack" style="margin-top: 20rpx;">返回</button>
 </view>

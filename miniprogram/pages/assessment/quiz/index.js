@@ -52,7 +52,19 @@ Page({
   },
 
   onBack() {
-    wx.navigateBack();
+    // 防误触提示
+    wx.showModal({
+      title: '退出测评',
+      content: '当前进度将不会保存，确定要退出吗？',
+      confirmText: '退出',
+      confirmColor: '#FF4D4F',
+      cancelText: '继续',
+      success: (res) => {
+        if (res.confirm) {
+          wx.navigateBack();
+        }
+      }
+    });
   },
 
   // 选择选项

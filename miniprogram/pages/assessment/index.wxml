@@ -72,6 +72,25 @@
           <view class="sub-text text-xs mt-2">创意 • 灵活</view>
         </view>
       </view>
+
+      <!-- 新增：最近测评记录 -->
+      <view class="history-section mt-4 mb-4" bindtap="goToHistory">
+        <view class="flex-between mb-3">
+          <text class="title-md">我的测评</text>
+          <text class="text-gray text-xs">历史记录 ></text>
+        </view>
+        <view class="history-mini-card">
+          <view class="flex-row">
+            <view class="mini-icon">📂</view>
+            <view class="ml-3">
+              <view class="text-bold text-sm">INTJ · 建筑师型</view>
+              <view class="text-xs text-gray mt-1">2023.11.24</view>
+            </view>
+          </view>
+          <view class="score-badge">92分</view>
+        </view>
+      </view>
+
     </view>
   </scroll-view>
 </view>

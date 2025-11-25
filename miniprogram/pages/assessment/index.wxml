@@ -58,14 +58,14 @@
       </view>
       
       <view class="grid-2">
-        <view class="career-card selected" bindtap="goToDetail" style="animation-delay: 0.5s;">
+        <view class="career-card" hover-class="selected" bindtap="goToDetail" data-code="frontend" style="animation-delay: 0.5s;">
           <view class="match-badge">92% 匹配</view>
           <view class="icon-circle bg-purple-light">💻</view>
           <view class="card-title">前端开发</view>
           <view class="sub-text text-xs mt-2">高薪 • 热门</view>
         </view>
          
-        <view class="career-card" bindtap="goToDetail" style="animation-delay: 0.6s;">
+        <view class="career-card" hover-class="selected" bindtap="goToDetail" data-code="ui_designer" style="animation-delay: 0.6s;">
           <view class="match-badge gray">85% 匹配</view>
           <view class="icon-circle bg-blue-light">🎨</view>
           <view class="card-title">UI 设计师</view>

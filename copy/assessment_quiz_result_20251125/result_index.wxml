@@ -7,10 +7,10 @@
 
   <block wx:else>
     <view class="result-page">
-      <view class="result-header" style="padding-top: {{navHeight}}px;">
-        <view class="back-btn-white" bindtap="goHome" style="top: {{menuButtonTop}}px;">←</view>
+      <view class="result-header">
+        <view class="back-btn-white" bindtap="goHome">←</view>
         <!-- 分享按钮 (新增) -->
-        <view class="share-btn-white" bindtap="showShareModal" style="top: {{menuButtonTop}}px;">分享</view>
+        <view class="share-btn-white" bindtap="showShareModal">分享</view>
 
         <view class="header-content">
           <view class="score-ring">

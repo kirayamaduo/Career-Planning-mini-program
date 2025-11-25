@@ -71,9 +71,10 @@ Page({
     })
   },
 
-  goToDetail() {
+  goToDetail(e) {
+    const code = e.currentTarget.dataset.code || 'frontend';
     wx.navigateTo({
-      url: '/pages/assessment/career-detail/index?id=frontend',
+      url: `/pages/assessment/career-detail/index?id=${code}`,
     })
   },
 

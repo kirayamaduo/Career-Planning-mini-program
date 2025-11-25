@@ -69,7 +69,7 @@ Page({
 
   // 选择选项
   selectOption(e) {
-    if (this.data.isLoading || this.data.isSubmitting) return;
+    if (this.data.isLoading) return;
     
     const { value } = e.currentTarget.dataset;
     const { currentIndex, questions, answers } = this.data;
@@ -141,7 +141,7 @@ Page({
     }
 
     this.setData({ isSubmitting: true });
-    wx.showLoading({ title: 'AI 分析中...', mask: true });
+    wx.showLoading({ title: 'AI 正在深入分析...', mask: true });
 
     // 调用云函数生成报告
     wx.cloud.callFunction({
@@ -151,14 +151,14 @@ Page({
       }
     }).then(res => {
       wx.hideLoading();
+      this.setData({ isSubmitting: false });
       
       if (res.result && res.result.success) {
         // 跳转到结果页并传递 resultId
-        wx.redirectTo({
+        wx.navigateTo({
           url: `/pages/assessment/result/index?id=${res.result.resultId}`,
         });
       } else {
-        this.setData({ isSubmitting: false });
         console.error('Analysis failed:', res);
         wx.showToast({
           title: '分析失败，请重试',
@@ -169,20 +169,10 @@ Page({
       wx.hideLoading();
       this.setData({ isSubmitting: false });
       console.error('Cloud function error:', err);
-      
-      const errMsg = err.message || '';
-      if (errMsg.includes('timed out') || err.errCode === -504003) {
-         wx.showToast({
-           title: '分析时间较长，请耐心等待或稍后查看结果',
-           icon: 'none',
-           duration: 3000
-         });
-      } else {
-        wx.showToast({
-          title: '网络异常，请重试',
-          icon: 'none'
-        });
-      }
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none'
+      });
     });
   }
 })

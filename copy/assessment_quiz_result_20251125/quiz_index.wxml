@@ -15,7 +15,7 @@
       
       <view class="options-list">
         <block wx:for="{{questions[currentIndex].options}}" wx:key="value">
-          <view class="option-item {{answers[questions[currentIndex]._id] === item.value ? 'active' : ''}}" 
+          <view class="option-item {{answers[questions[currentIndex]._id] === item.value ? 'option-hover' : ''}}" 
                 hover-class="option-hover" 
                 bindtap="selectOption" 
                 data-value="{{item.value}}">

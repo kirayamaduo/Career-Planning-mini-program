@@ -5,7 +5,8 @@
 
 .result-header {
   background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  padding: 100rpx 40rpx 120rpx;
+  /* 移除固定的 padding-top */
+  padding: 0 40rpx 120rpx;
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -13,20 +14,27 @@
 }
 
 .back-btn-white {
-  position: absolute; top: 100rpx; left: 32rpx;
+  position: absolute; 
+  left: 32rpx;
   font-size: 40rpx; font-weight: bold; z-index: 10;
+  /* top 由内联样式控制 */
 }
 
 /* 新增分享按钮样式 */
 .share-btn-white {
-  position: absolute; top: 105rpx; right: 32rpx;
-  font-size: 28rpx; font-weight: 600; z-index: 10;
+  position: absolute; 
+  left: 110rpx; /* 改为左侧显示，避免与右上角胶囊重叠 */
+  font-size: 26rpx; font-weight: 600; z-index: 10;
   background: rgba(255,255,255,0.2);
   padding: 8rpx 24rpx; border-radius: 30rpx;
   backdrop-filter: blur(4px);
+  /* top 由内联样式控制 */
+  display: flex; align-items: center; justify-content: center;
+  height: 32px; /* 与胶囊对齐 */
+  box-sizing: border-box;
 }
 
-.header-content { position: relative; z-index: 5; }
+.header-content { position: relative; z-index: 5; padding-top: 120rpx; }
 
 .score-ring {
   width: 160rpx; height: 160rpx;

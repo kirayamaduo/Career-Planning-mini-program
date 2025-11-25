@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "openapi": []
+  },
+  "env": "cloud1-3g8bn62od8f831f1",
+  "timeout": 60,
+  "envVariables": {}
+}
+

@@ -113,3 +113,33 @@
 .text-blue-900 { color: #1E3A8A; }
 .text-blue-700 { color: #1D4ED8; }
 .arrow-right { font-family: monospace; font-weight: bold; font-size: 28rpx; opacity: 0.6; }
+/* 空状态样式 */
+.empty-state {
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  border-radius: var(--radius-card);
+  padding: 80rpx 40rpx;
+  text-align: center;
+  color: white;
+  margin-bottom: 40rpx;
+}
+
+.empty-icon {
+  font-size: 96rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.empty-suggestions {
+  padding: 60rpx 20rpx;
+  text-align: center;
+}
+
+.empty-text-sm {
+  font-size: 24rpx;
+  color: #999;
+}

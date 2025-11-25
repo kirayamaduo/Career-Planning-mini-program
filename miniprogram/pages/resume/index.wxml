@@ -11,7 +11,8 @@
   <scroll-view scroll-y class="page-content">
     <view class="container">
       
-      <view class="resume-hero-card">
+      <!-- 简历评分卡片 -->
+      <view class="resume-hero-card" wx:if="{{currentResume}}">
         <view class="bg-glow glow-1"></view>
         <view class="bg-glow glow-2"></view>
 
@@ -20,19 +21,19 @@
             <view>
               <view class="hero-label">简历评分</view>
               <view class="score-row">
-                <text class="score-num">85</text>
+                <text class="score-num">{{currentResume.score || 0}}</text>
                 <text class="score-total">/100</text>
               </view>
-              <view class="rank-badge">
-                <text>🏆 超过 92% 求职者</text>
+              <view class="rank-badge" wx:if="{{currentResume.score > 0}}">
+                <text>🏆 超过 {{currentResume.score}}% 求职者</text>
               </view>
             </view>
 
             <view class="dashboard-gauge">
               <view class="gauge-track"></view>
               <view class="gauge-inner">
-                <text class="grade-text">A</text>
-                <text class="grade-sub">优秀</text>
+                <text class="grade-text">{{currentResume.grade || '-'}}</text>
+                <text class="grade-sub">{{currentResume.gradeText || '未评分'}}</text>
               </view>
             </view>
           </view>
@@ -40,7 +41,7 @@
           <view class="divider-line"></view>
 
           <view class="flex-between">
-            <view class="update-tip">上次更新: 10分钟前</view>
+            <view class="update-tip">上次更新: {{currentResume.lastDiagnosisTime ? '刚刚' : '未诊断'}}</view>
             <view class="flex-row">
               <view class="btn-glass mr-2" bindtap="handleAiDiagnose">AI 诊断</view>
               <view class="btn-white" bindtap="handlePreviewPdf">预览 PDF</view>
@@ -49,51 +50,72 @@
         </view>
       </view>
 
+      <!-- 空状态提示 -->
+      <view class="empty-state" wx:else>
+        <text class="empty-icon">📄</text>
+        <text class="empty-text">还没有简历，快去创建一个吧</text>
+      </view>
+
       <view class="flex-between mb-3">
         <text class="title-md">我的简历</text>
         <view class="icon-btn-sm">⚙️</view>
       </view>
 
       <view class="grid-2">
-        <view class="card-grid-item" style="animation-delay: 0.4s;" bindtap="handleEditResume" data-id="1">
+        <!-- 动态渲染简历列表 -->
+        <view 
+          wx:for="{{myResumes}}" 
+          wx:key="_id"
+          wx:if="{{index < 3}}"
+          class="card-grid-item" 
+          style="animation-delay: {{0.4 + index * 0.1}}s;" 
+          bindtap="handleEditResume" 
+          data-id="{{item._id}}"
+        >
           <view class="flex-between w-full mb-2">
             <view class="icon-box-sm bg-blue-light">📄</view>
-            <view class="more-dots" catchtap="handleResumeAction" data-id="1">···</view>
+            <view class="more-dots" catchtap="handleResumeAction" data-id="{{item._id}}">···</view>
           </view>
-          <view class="item-title mt-2">高级前端...</view>
-          <view class="item-sub text-xs">2小时前更新</view>
+          <view class="item-title mt-2">{{item.title}}</view>
+          <view class="item-sub text-xs">{{item.updateTime ? '最近更新' : '待完善'}}</view>
         </view>
 
+        <!-- 新建简历卡片 -->
         <view class="card-grid-item dashed-border" hover-class="hover-bg" style="animation-delay: 0.5s;" bindtap="handleEditResume">
           <view class="plus-icon">+</view>
           <view class="text-primary font-bold text-sm mt-2">新建简历</view>
         </view>
       </view>
 
+      <!-- 优化建议区 -->
       <view class="mb-3 mt-4">
         <text class="title-md">优化建议</text>
       </view>
 
-      <view class="card-item warn-style" style="animation-delay: 0.6s;" bindtap="handleOptimizationDetail" data-prompt="如何为简历增加量化数据？">
-        <view class="flex-row">
-          <view class="icon-mini">⚡️</view>
-          <view class="ml-2">
-            <view class="font-bold text-sm text-amber-900">增加量化数据</view>
-            <view class="text-xs text-amber-700 opacity-80">HR 偏好看到具体的增长...</view>
+      <!-- 动态渲染优化建议 -->
+      <view wx:if="{{suggestions.length > 0}}">
+        <view 
+          wx:for="{{suggestions}}" 
+          wx:key="index"
+          class="card-item {{item.type === 'warn' ? 'warn-style' : 'info-style'}}" 
+          style="animation-delay: {{0.6 + index * 0.1}}s;" 
+          bindtap="handleOptimizationDetail" 
+          data-index="{{index}}"
+        >
+          <view class="flex-row">
+            <view class="icon-mini">{{item.icon}}</view>
+            <view class="ml-2">
+              <view class="font-bold text-sm {{item.type === 'warn' ? 'text-amber-900' : 'text-blue-900'}}">{{item.title}}</view>
+              <view class="text-xs {{item.type === 'warn' ? 'text-amber-700' : 'text-blue-700'}} opacity-80">{{item.brief}}</view>
+            </view>
           </view>
+          <view class="arrow-right {{item.type === 'warn' ? 'text-amber-900' : 'text-blue-900'}}">></view>
         </view>
-        <view class="arrow-right text-amber-900">></view>
       </view>
-      
-      <view class="card-item info-style mt-2" style="animation-delay: 0.7s;" bindtap="handleOptimizationDetail" data-prompt="如何完善简历中的教育经历？">
-        <view class="flex-row">
-          <view class="icon-mini">🎓</view>
-          <view class="ml-2">
-            <view class="font-bold text-sm text-blue-900">完善教育经历</view>
-            <view class="text-xs text-blue-700 opacity-80">补充主修课程可提高...</view>
-          </view>
-        </view>
-        <view class="arrow-right text-blue-900">></view>
+
+      <!-- 空建议提示 -->
+      <view wx:else class="empty-suggestions">
+        <text class="empty-text-sm">完成 AI 诊断后，这里会显示优化建议</text>
       </view>
 
     </view>

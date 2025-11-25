@@ -1,63 +1,84 @@
-<view class="result-page">
-  <view class="result-header">
-    <view class="back-btn-white" bindtap="onBack">←</view>
-    <view class="header-content">
-      <view class="score-ring">
-        <text class="score-val">92</text>
-        <text class="score-label">匹配度</text>
-      </view>
-      <view class="result-title">INTJ - 建筑师型</view>
-      <view class="result-desc">你具有独特的战略眼光和强大的逻辑思维能力。</view>
-    </view>
-    <!-- 背景装饰 -->
-    <view class="bg-circle c1"></view>
-    <view class="bg-circle c2"></view>
+<view class="container">
+  <!-- Loading 状态 -->
+  <view wx:if="{{isLoading}}" class="g-loading-box">
+    <view class="g-loading-spinner"></view>
+    <view class="loading-text">AI 正在生成分析报告...</view>
   </view>
 
-  <view class="report-card">
-    <view class="section-title">能力维度</view>
-    
-    <!-- 简易能力条形图 -->
-    <view class="skill-bars">
-      <view class="skill-row">
-        <text class="skill-name">逻辑分析</text>
-        <view class="bar-track"><view class="bar-fill" style="width: 90%;"></view></view>
-        <text class="skill-val">9.0</text>
+  <block wx:else>
+    <view class="result-page">
+      <view class="result-header" style="padding-top: {{navHeight}}px;">
+        <view class="back-btn-white" bindtap="goHome" style="top: {{menuButtonTop}}px;">←</view>
+        <!-- 分享按钮 (新增) -->
+        <view class="share-btn-white" bindtap="showShareModal" style="top: {{menuButtonTop}}px;">分享</view>
+
+        <view class="header-content">
+          <view class="score-ring">
+            <text class="score-val">{{report.score}}</text>
+            <text class="score-label">潜力指数</text>
+          </view>
+          <view class="result-title">{{report.type}}</view>
+          <view class="result-desc">{{report.advice}}</view>
+        </view>
+        <!-- 背景装饰 -->
+        <view class="bg-circle c1"></view>
+        <view class="bg-circle c2"></view>
       </view>
-      <view class="skill-row">
-        <text class="skill-name">创意设计</text>
-        <view class="bar-track"><view class="bar-fill warning" style="width: 75%;"></view></view>
-        <text class="skill-val">7.5</text>
-      </view>
-      <view class="skill-row">
-        <text class="skill-name">团队协作</text>
-        <view class="bar-track"><view class="bar-fill success" style="width: 85%;"></view></view>
-        <text class="skill-val">8.5</text>
+
+      <view class="report-card">
+        <view class="section-title">能力维度</view>
+        
+        <!-- 动态能力条形图 -->
+        <view class="skill-bars">
+          <block wx:for="{{report.dimensions}}" wx:key="name">
+            <view class="skill-row">
+              <text class="skill-name">{{item.name}}</text>
+              <view class="bar-track">
+                <view class="bar-fill" style="width: {{item.value}}%;"></view>
+              </view>
+              <text class="skill-val">{{item.value}}</text>
+            </view>
+          </block>
+        </view>
+
+        <view class="divider"></view>
+
+        <view class="section-title">推荐职业</view>
+        
+        <block wx:for="{{report.careers}}" wx:key="title">
+          <view class="job-card" bindtap="viewCareerDetail" data-index="{{index}}">
+            <view class="job-icon">💼</view>
+            <view class="job-info">
+              <view class="job-name">{{item.title}}</view>
+              <view class="job-salary">匹配度 {{item.match}}%</view>
+            </view>
+            <view class="job-arrow">→</view>
+          </view>
+        </block>
+
+        <button class="btn-save" bindtap="goHome">返回测评首页</button>
       </view>
     </view>
 
-    <view class="divider"></view>
-
-    <view class="section-title">推荐职业</view>
-    
-    <view class="job-card" bindtap="goToDetail">
-      <view class="job-icon">💻</view>
-      <view class="job-info">
-        <view class="job-name">高级前端工程师</view>
-        <view class="job-salary">¥25k - 45k</view>
+    <!-- 分享海报弹窗 (Mock UI) -->
+    <view class="modal-mask" wx:if="{{showShare}}" bindtap="hideShareModal">
+      <view class="share-modal" catchtap="stopProp">
+        <view class="poster-preview">
+          <view class="poster-header">
+            <view class="poster-title">我的职业基因</view>
+            <view class="poster-type">{{report.type}}</view>
+          </view>
+          <view class="poster-radar-mock">
+            <view class="radar-circle"></view>
+            <text>AI 深度解析</text>
+          </view>
+          <view class="poster-footer">
+            <view class="qr-mock"></view>
+            <text class="qr-tip">长按识别测试</text>
+          </view>
+        </view>
+        <button class="btn-save-image" bindtap="saveImageMock">保存到相册</button>
       </view>
-      <view class="job-arrow">→</view>
     </view>
-
-    <view class="job-card" bindtap="goToDetail">
-      <view class="job-icon">📈</view>
-      <view class="job-info">
-        <view class="job-name">数据分析专家</view>
-        <view class="job-salary">¥30k - 50k</view>
-      </view>
-      <view class="job-arrow">→</view>
-    </view>
-
-    <button class="btn-save" bindtap="onBack">保存完整报告</button>
-  </view>
+  </block>
 </view>

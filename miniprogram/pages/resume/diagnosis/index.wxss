@@ -1,0 +1,294 @@
+.diagnosis-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #6366F1 0%, #F5F5F7 30%);
+  padding-bottom: 90rpx;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60rpx 40rpx;
+}
+
+.loading-content {
+  width: 100%;
+  max-width: 600rpx;
+  background: white;
+  border-radius: 32rpx;
+  padding: 60rpx 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(99, 102, 241, 0.2);
+  text-align: center;
+}
+
+.loading-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20rpx); }
+}
+
+.loading-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 40rpx;
+}
+
+/* 进度条 */
+.progress-wrapper {
+  margin-bottom: 30rpx;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16rpx;
+  background: #E5E7EB;
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: #6B7280;
+}
+
+.progress-percent {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #6366F1;
+}
+
+.loading-tip {
+  font-size: 24rpx;
+  color: #9CA3AF;
+}
+
+/* 内容区域 */
+.content-container {
+  padding: 100rpx 40rpx;
+}
+
+/* 评分卡片 */
+.score-card {
+  background: white;
+  border-radius: 24rpx;
+  padding: 50rpx 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(99, 102, 241, 0.15);
+  margin-bottom: 30rpx;
+}
+
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.score-main {
+  display: flex;
+  align-items: baseline;
+}
+
+.score-num {
+  font-size: 96rpx;
+  font-weight: bold;
+  color: #6366F1;
+}
+
+.score-total {
+  font-size: 40rpx;
+  color: #999;
+  margin-left: 8rpx;
+}
+
+.grade-badge {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+}
+
+.grade-badge.grade-A {
+  background: linear-gradient(135deg, #10B981, #34D399);
+}
+
+.grade-badge.grade-B {
+  background: linear-gradient(135deg, #3B82F6, #60A5FA);
+}
+
+.grade-badge.grade-C {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+}
+
+.grade-badge.grade-D {
+  background: linear-gradient(135deg, #EF4444, #F87171);
+}
+
+.grade-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.grade-label {
+  font-size: 22rpx;
+  color: white;
+  opacity: 0.9;
+  margin-top: 4rpx;
+}
+
+.score-desc {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+}
+
+/* 报告区域 */
+.report-section,
+.suggestions-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.title-icon {
+  font-size: 40rpx;
+  margin-right: 12rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.report-content {
+  line-height: 1.8;
+}
+
+.report-text {
+  font-size: 28rpx;
+  color: #4B5563;
+  white-space: pre-wrap;
+}
+
+/* 建议列表 */
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.suggestion-card {
+  border-radius: 50rpx;
+  padding: 30rpx;
+  transition: all 0.3s;
+}
+
+.suggestion-card.suggestion-warn {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+}
+
+.suggestion-card.suggestion-info {
+  background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+}
+
+.suggestion-header {
+  display: flex;
+  align-items: center;
+  gap: 50rpx;
+}
+
+.suggestion-icon {
+  font-size: 48rpx;
+  flex-shrink: 0;
+}
+
+.suggestion-info {
+  flex: 1;
+}
+
+.suggestion-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 8rpx;
+}
+
+.suggestion-brief {
+  font-size: 24rpx;
+  color: #6B7280;
+}
+
+.arrow-icon {
+  font-size: 48rpx;
+  color: #9CA3AF;
+  flex-shrink: 0;
+}
+
+/* 底部按钮 */
+.action-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  background: white;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: white;
+  border: 2rpx solid #6366F1;
+  color: #6366F1;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 30rpx;
+  margin: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.btn-secondary::after {
+  border: none;
+}
+

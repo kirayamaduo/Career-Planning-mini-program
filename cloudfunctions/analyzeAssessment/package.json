@@ -1,0 +1,1 @@
+{"name":"analyzeAssessment","version":"1.0.0","description":"AI Assessment Analysis","main":"index.js","dependencies":{"openai":"^4.0.0","wx-server-sdk":"latest"}}

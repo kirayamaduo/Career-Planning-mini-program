@@ -1,0 +1,84 @@
+<view class="diagnosis-page">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-content">
+      <view class="loading-icon">🤖</view>
+      <view class="loading-title">AI 深度分析中</view>
+      
+      <!-- 进度条 -->
+      <view class="progress-wrapper">
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{progress}}%"></view>
+        </view>
+        <view class="progress-info">
+          <text class="progress-text">{{progressText}}</text>
+          <text class="progress-percent">{{progress}}%</text>
+        </view>
+      </view>
+      
+      <view class="loading-tip">预计需要 10-20 秒，请耐心等待...</view>
+    </view>
+  </view>
+
+  <!-- 诊断结果 -->
+  <view wx:else class="content-container">
+    <!-- 头部评分卡片 -->
+    <view class="score-card">
+      <view class="score-header">
+        <view class="score-main">
+          <text class="score-num">{{score}}</text>
+          <text class="score-total">/100</text>
+        </view>
+        <view class="grade-badge grade-{{grade}}">
+          <text class="grade-text">{{grade}}</text>
+          <text class="grade-label">{{gradeText}}</text>
+        </view>
+      </view>
+      <view class="score-desc">您的简历已超过 {{score}}% 的求职者</view>
+    </view>
+
+    <!-- 完整分析报告 -->
+    <view class="report-section">
+      <view class="section-title">
+        <text class="title-icon">📋</text>
+        <text class="title-text">详细分析报告</text>
+      </view>
+      <view class="report-content">
+        <text class="report-text">{{fullReport}}</text>
+      </view>
+    </view>
+
+    <!-- 优化建议列表 -->
+    <view class="suggestions-section">
+      <view class="section-title">
+        <text class="title-icon">💡</text>
+        <text class="title-text">优化建议 ({{suggestions.length}})</text>
+      </view>
+      
+      <view class="suggestions-list">
+        <view 
+          wx:for="{{suggestions}}" 
+          wx:key="index"
+          class="suggestion-card suggestion-{{item.type}}"
+          bindtap="handleSuggestionDetail"
+          data-index="{{index}}"
+        >
+          <view class="suggestion-header">
+            <view class="suggestion-icon">{{item.icon}}</view>
+            <view class="suggestion-info">
+              <view class="suggestion-title">{{item.title}}</view>
+              <view class="suggestion-brief">{{item.brief}}</view>
+            </view>
+            <view class="arrow-icon">›</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作按钮 -->
+    <view class="action-buttons">
+      <button class="btn-secondary" bindtap="handleBackToResume">返回简历中心</button>
+    </view>
+  </view>
+</view>
+

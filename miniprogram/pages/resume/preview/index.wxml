@@ -1,0 +1,184 @@
+<view class="preview-page">
+  <!-- 自定义导航栏 -->
+  <view class="nav-header" style="padding-top: {{statusBarHeight}}px; height: {{navHeight}}px;">
+    <view class="nav-back" bindtap="handleBack">
+      <text class="back-icon">❮</text>
+    </view>
+    <view class="nav-title">简历预览</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 预览内容区 -->
+  <scroll-view scroll-y class="preview-content" style="margin-top: {{navHeight}}px;">
+    <!-- 模板类型简历 -->
+    <view wx:if="{{resume && resume.type === 'template' && resume.resumeData}}" class="resume-template">
+      <!-- 个人信息头部 -->
+      <view class="resume-header">
+        <view class="avatar-box">
+          <image class="avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed={{resume.resumeData.name}}"></image>
+        </view>
+        <view class="basic-info">
+          <view class="name">{{resume.resumeData.name || '未填写'}}</view>
+          <view class="info-row">
+            <text class="info-item">{{resume.resumeData.age}}岁</text>
+            <text class="divider">|</text>
+            <text class="info-item">{{resume.resumeData.gender}}</text>
+            <text class="divider">|</text>
+            <text class="info-item">{{resume.resumeData.city}}</text>
+          </view>
+          <view class="contact-row">
+            <text class="contact-item">📱 {{resume.resumeData.phone}}</text>
+            <text class="contact-item">📧 {{resume.resumeData.email}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 求职意向 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.targetPosition}}">
+        <view class="section-title">
+          <view class="title-icon">💼</view>
+          <text class="title-text">求职意向</text>
+        </view>
+        <view class="section-content">
+          <view class="job-intention">
+            <text class="label">意向岗位：</text><text class="value">{{resume.resumeData.targetPosition}}</text>
+          </view>
+          <view class="job-intention">
+            <text class="label">意向城市：</text><text class="value">{{resume.resumeData.targetCity}}</text>
+          </view>
+          <view class="job-intention">
+            <text class="label">期望薪资：</text><text class="value">{{resume.resumeData.expectedSalary}}</text>
+          </view>
+          <view class="job-intention">
+            <text class="label">入职时间：</text><text class="value">{{resume.resumeData.availableTime}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 教育背景 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.education.length > 0}}">
+        <view class="section-title">
+          <view class="title-icon">🎓</view>
+          <text class="title-text">教育背景</text>
+        </view>
+        <view class="section-content">
+          <view wx:for="{{resume.resumeData.education}}" wx:key="index" class="education-item" wx:if="{{item.school}}">
+            <view class="time-line">
+              <view class="time-dot"></view>
+              <view class="time-text">{{item.timeRange}}</view>
+            </view>
+            <view class="edu-content">
+              <view class="edu-title">{{item.school}}</view>
+              <view class="edu-detail">{{item.major}} · {{item.degree}}</view>
+              <view class="edu-detail" wx:if="{{item.gpa}}">GPA: {{item.gpa}} {{item.rank}}</view>
+              <view class="edu-courses" wx:if="{{item.courses}}">主修课程：{{item.courses}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 工作经验 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.workExperience.length > 0}}">
+        <view class="section-title">
+          <view class="title-icon">💻</view>
+          <text class="title-text">工作经验</text>
+        </view>
+        <view class="section-content">
+          <view wx:for="{{resume.resumeData.workExperience}}" wx:key="index" class="work-item" wx:if="{{item.company}}">
+            <view class="time-line">
+              <view class="time-dot"></view>
+              <view class="time-text">{{item.timeRange}}</view>
+            </view>
+            <view class="work-content">
+              <view class="work-title">{{item.company}}</view>
+              <view class="work-position">{{item.position}}</view>
+              <view class="work-responsibilities">
+                <view wx:for="{{item.responsibilities}}" wx:key="rIndex" wx:for-item="resp" class="resp-item" wx:if="{{resp}}">
+                  • {{resp}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 荣誉证书 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.certificates.length > 0 && resume.resumeData.certificates[0]}}">
+        <view class="section-title">
+          <view class="title-icon">🏆</view>
+          <text class="title-text">荣誉证书</text>
+        </view>
+        <view class="section-content">
+          <view wx:for="{{resume.resumeData.certificates}}" wx:key="index" class="cert-item" wx:if="{{item}}">
+            • {{item}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 语言能力 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.skills.computer || resume.resumeData.skills.english}}">
+        <view class="section-title">
+          <view class="title-icon">🗣</view>
+          <text class="title-text">语言能力</text>
+        </view>
+        <view class="section-content">
+          <view class="skill-item" wx:if="{{resume.resumeData.skills.computer}}">
+            <text class="skill-label">计算机：</text>
+            <text class="skill-text">{{resume.resumeData.skills.computer}}</text>
+          </view>
+          <view class="skill-item" wx:if="{{resume.resumeData.skills.english}}">
+            <text class="skill-label">英语：</text>
+            <text class="skill-text">{{resume.resumeData.skills.english}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 自我评价 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.selfEvaluation}}">
+        <view class="section-title">
+          <view class="title-icon">💬</view>
+          <text class="title-text">自我评价</text>
+        </view>
+        <view class="section-content">
+          <text class="self-eval">{{resume.resumeData.selfEvaluation}}</text>
+        </view>
+      </view>
+
+      <!-- 兴趣爱好 -->
+      <view class="resume-section" wx:if="{{resume.resumeData.hobbies.length > 0}}">
+        <view class="section-title">
+          <view class="title-icon">❤️</view>
+          <text class="title-text">兴趣爱好</text>
+        </view>
+        <view class="section-content">
+          <view class="hobby-tags">
+            <text wx:for="{{resume.resumeData.hobbies}}" wx:key="item" class="hobby-tag">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 文本类型简历（兼容旧版） -->
+    <view wx:elif="{{resume && resume.content}}" class="resume-text">
+      <view class="text-header">
+        <text class="text-title">{{resume.title}}</text>
+      </view>
+      <view class="text-content">
+        <text class="content-text">{{resume.content}}</text>
+      </view>
+    </view>
+
+    <!-- PDF类型提示 -->
+    <view wx:elif="{{isPdf}}" class="pdf-hint">
+      <view class="hint-icon">📄</view>
+      <text class="hint-text">PDF简历已在外部打开</text>
+    </view>
+
+    <view class="bottom-space"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar">
+    <button class="btn-edit" bindtap="handleEdit">编辑</button>
+  </view>
+</view>

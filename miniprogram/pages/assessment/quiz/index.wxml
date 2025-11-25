@@ -3,21 +3,24 @@
   <view class="nav-header">
     <view class="back-btn" bindtap="onBack">←</view>
     <view class="progress-bar">
-      <view class="progress-fill" style="width: {{((current + 1) / questions.length) * 100}}%"></view>
+      <view class="progress-fill" style="width: {{progress}}%"></view>
     </view>
-    <view class="step-text">{{current + 1}}/{{questions.length}}</view>
+    <view class="step-text">{{currentIndex + 1}}/{{totalQuestions}}</view>
   </view>
 
   <view class="question-container">
     <view class="question-card">
-      <view class="q-tag">Question {{current + 1}}</view>
-      <view class="q-title">{{questions[current].title}}</view>
+      <view class="q-tag">Question {{currentIndex + 1}}</view>
+      <view class="q-title">{{questions[currentIndex].title}}</view>
       
       <view class="options-list">
-        <block wx:for="{{questions[current].options}}" wx:key="label">
-          <view class="option-item" hover-class="option-hover" bindtap="selectOption" data-index="{{index}}">
-            <view class="opt-label">{{item.label}}</view>
-            <view class="opt-text">{{item.text}}</view>
+        <block wx:for="{{questions[currentIndex].options}}" wx:key="value">
+          <view class="option-item {{answers[questions[currentIndex]._id] === item.value ? 'active' : ''}}" 
+                hover-class="option-hover" 
+                bindtap="selectOption" 
+                data-value="{{item.value}}">
+            <view class="opt-label">{{item.value}}</view>
+            <view class="opt-text">{{item.label}}</view>
           </view>
         </block>
       </view>

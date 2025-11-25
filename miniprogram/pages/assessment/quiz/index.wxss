@@ -88,7 +88,7 @@
   transition: all 0.2s;
 }
 
-.option-hover {
+.option-hover, .option-item.active {
   background: #EEF2FF;
   border-color: var(--primary);
 }
@@ -107,7 +107,7 @@
   margin-right: 24rpx;
 }
 
-.option-hover .opt-label {
+.option-hover .opt-label, .option-item.active .opt-label {
   background: var(--primary);
   color: #fff;
 }

@@ -1,4 +1,6 @@
 {
+  "navigationBarTitleText": "测评报告",
   "navigationStyle": "custom",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

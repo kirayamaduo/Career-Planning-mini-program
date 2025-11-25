@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   data: {
     isPageActive: false,
@@ -10,9 +12,31 @@ Page({
     isLoading: false
   },
   
+  onLoad(options) {
+    // TabBar 页面 onLoad 只有第一次加载触发，切换Tab不触发
+    if (options && options.prompt) {
+      const prompt = decodeURIComponent(options.prompt);
+      setTimeout(() => {
+        this.sendMessage(prompt);
+      }, 500);
+    }
+  },
+
   onShow() {
     this.setData({ isPageActive: true });
+
+    // 检查全局变量是否有待发送的消息 (用于从其他页面 switchTab 跳转过来)
+    if (app.globalData && app.globalData.chatPrompt) {
+      const prompt = app.globalData.chatPrompt;
+      app.globalData.chatPrompt = null; // 清除，防止重复发送
+      
+      // 稍微延迟，体验更好
+      setTimeout(() => {
+        this.sendMessage(prompt);
+      }, 300);
+    }
   },
+
   onHide() {
     this.setData({ isPageActive: false });
   },

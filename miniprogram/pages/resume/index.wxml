@@ -42,8 +42,8 @@
           <view class="flex-between">
             <view class="update-tip">上次更新: 10分钟前</view>
             <view class="flex-row">
-              <view class="btn-glass mr-2">AI 诊断</view>
-              <view class="btn-white">预览 PDF</view>
+              <view class="btn-glass mr-2" bindtap="handleAiDiagnose">AI 诊断</view>
+              <view class="btn-white" bindtap="handlePreviewPdf">预览 PDF</view>
             </view>
           </view>
         </view>
@@ -55,16 +55,16 @@
       </view>
 
       <view class="grid-2">
-        <view class="card-grid-item" style="animation-delay: 0.4s;">
+        <view class="card-grid-item" style="animation-delay: 0.4s;" bindtap="handleEditResume" data-id="1">
           <view class="flex-between w-full mb-2">
             <view class="icon-box-sm bg-blue-light">📄</view>
-            <view class="more-dots">···</view>
+            <view class="more-dots" catchtap="handleResumeAction" data-id="1">···</view>
           </view>
           <view class="item-title mt-2">高级前端...</view>
           <view class="item-sub text-xs">2小时前更新</view>
         </view>
 
-        <view class="card-grid-item dashed-border" hover-class="hover-bg" style="animation-delay: 0.5s;">
+        <view class="card-grid-item dashed-border" hover-class="hover-bg" style="animation-delay: 0.5s;" bindtap="handleEditResume">
           <view class="plus-icon">+</view>
           <view class="text-primary font-bold text-sm mt-2">新建简历</view>
         </view>
@@ -74,7 +74,7 @@
         <text class="title-md">优化建议</text>
       </view>
 
-      <view class="card-item warn-style" style="animation-delay: 0.6s;">
+      <view class="card-item warn-style" style="animation-delay: 0.6s;" bindtap="handleOptimizationDetail" data-prompt="如何为简历增加量化数据？">
         <view class="flex-row">
           <view class="icon-mini">⚡️</view>
           <view class="ml-2">
@@ -85,7 +85,7 @@
         <view class="arrow-right text-amber-900">></view>
       </view>
       
-      <view class="card-item info-style mt-2" style="animation-delay: 0.7s;">
+      <view class="card-item info-style mt-2" style="animation-delay: 0.7s;" bindtap="handleOptimizationDetail" data-prompt="如何完善简历中的教育经历？">
         <view class="flex-row">
           <view class="icon-mini">🎓</view>
           <view class="ml-2">

@@ -5,10 +5,12 @@ Page({
     content: '',
     navHeight: 0,
     statusBarHeight: 20,
-    placeholderText: "在此处输入或粘贴您的简历文本...\n\n例如：\n个人信息：张三 138xxxx...\n教育背景：北京大学 计算机科学..."
+    placeholderText: "在此处输入或粘贴您的简历文本...\n\n例如：\n个人信息：张三 138xxxx...\n教育背景：北京大学 计算机科学...",
+    pageTitle: 'AI 简历诊断',
+    pageSubTitle: '粘贴简历内容，3秒生成专业分析报告'
   },
 
-  onLoad() {
+  onLoad(options) {
     const sysInfo = wx.getSystemInfoSync();
     const statusBarHeight = sysInfo.statusBarHeight;
     const menuButton = wx.getMenuButtonBoundingClientRect();
@@ -18,6 +20,22 @@ Page({
       statusBarHeight,
       navHeight: navBarHeight
     });
+
+    // 根据入口参数设置标题
+    if (options.type === 'create') {
+      this.setData({
+        pageTitle: '新建简历',
+        pageSubTitle: '输入您的简历内容，AI 帮您优化',
+        placeholderText: '请在此输入您的简历内容...'
+      });
+    } else if (options.id) {
+      // 模拟获取简历详情
+      this.setData({
+        pageTitle: '编辑简历',
+        pageSubTitle: '修改内容后可再次进行 AI 诊断',
+        content: '模拟的简历内容：\n高级前端工程师\n...' // 这里可以后续接真实数据
+      });
+    }
   },
 
   handleBack() {

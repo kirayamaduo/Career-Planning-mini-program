@@ -5,7 +5,54 @@ Page({
   },
 
   onLoad(options) {
-    this.generateReport();
+    if (options.id) {
+      this.fetchReport(options.id);
+    } else {
+      // 如果没有 ID，回退到模拟逻辑方便调试
+      this.generateReport();
+    }
+  },
+
+  fetchReport(id) {
+    const db = wx.cloud.database();
+    db.collection('assessment_results').doc(id).get().then(res => {
+      const aiResult = res.data.result;
+      
+      // 数据适配：将后端返回的 AI 数据转换为前端 UI 需要的格式
+      // 后端返回格式: { keywords, radar, careers, analysis }
+      
+      const adaptedReport = {
+        type: aiResult.keywords[0] || "待定类型", // 取第一个关键词作为类型
+        tags: aiResult.keywords,
+        score: 88, // 暂时写死或根据 radar 计算平均分
+        dimensions: [
+          { name: "执行力", value: aiResult.radar[0] },
+          { name: "沟通力", value: aiResult.radar[1] },
+          { name: "创造力", value: aiResult.radar[2] },
+          { name: "逻辑力", value: aiResult.radar[3] },
+          { name: "领导力", value: aiResult.radar[4] }
+          // 忽略最后一个抗压力以适配 UI 5个维度，或者修改 UI
+        ],
+        careers: aiResult.careers.map(c => ({
+          title: c,
+          match: Math.floor(Math.random() * (98 - 85) + 85), // 模拟匹配度
+          desc: "AI 推荐的高匹配度岗位"
+        })),
+        advice: aiResult.analysis
+      };
+
+      this.setData({
+        report: adaptedReport,
+        isLoading: false
+      });
+    }).catch(err => {
+      console.error('Fetch report failed', err);
+      wx.showToast({
+        title: '获取报告失败',
+        icon: 'none'
+      });
+      this.setData({ isLoading: false });
+    });
   },
 
   generateReport() {

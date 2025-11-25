@@ -1,56 +1,3 @@
-const questions = [
-  {
-    id: 1,
-    title: "在团队合作中，你通常更倾向于扮演什么角色？",
-    options: [
-      { value: 'A', label: '领导者，负责统筹和决策' },
-      { value: 'B', label: '执行者，专注于高效完成任务' },
-      { value: 'C', label: '协调者，处理人际关系和沟通' },
-      { value: 'D', label: '创新者，提供新点子和方案' }
-    ]
-  },
-  {
-    id: 2,
-    title: "当遇到一个全新的复杂问题时，你的第一反应是？",
-    options: [
-      { value: 'A', label: '拆解问题，逐步分析逻辑' },
-      { value: 'B', label: '寻找类似案例，参考已有经验' },
-      { value: 'C', label: '与他人讨论，集思广益' },
-      { value: 'D', label: '凭直觉尝试，边做边改' }
-    ]
-  },
-  {
-    id: 3,
-    title: "你更喜欢哪种工作环境？",
-    options: [
-      { value: 'A', label: '安静独立，可以深度思考' },
-      { value: 'B', label: '热闹开放，方便随时交流' },
-      { value: 'C', label: '井井有条，流程规范明确' },
-      { value: 'D', label: '灵活自由，充满不确定性' }
-    ]
-  },
-  {
-    id: 4,
-    title: "对于重复性的日常工作，你的态度是？",
-    options: [
-      { value: 'A', label: '乐于接受，喜欢熟能生巧的感觉' },
-      { value: 'B', label: '有些厌烦，会想办法自动化或改进' },
-      { value: 'C', label: '无所谓，只要是工作一部分就行' },
-      { value: 'D', label: '很难坚持，容易分心' }
-    ]
-  },
-  {
-    id: 5,
-    title: "你认为自己最大的优势是？",
-    options: [
-      { value: 'A', label: '逻辑思维和分析能力' },
-      { value: 'B', label: '沟通表达和共情能力' },
-      { value: 'C', label: '审美感知和创造力' },
-      { value: 'D', label: '执行力和抗压能力' }
-    ]
-  }
-];
-
 Page({
   data: {
     questions: [],
@@ -58,37 +5,68 @@ Page({
     totalQuestions: 0,
     progress: 0,
     answers: {}, // 存储用户答案 { questionId: optionValue }
-    isSubmitting: false
+    isSubmitting: false,
+    isLoading: true // 新增 loading 状态
   },
 
   onLoad(options) {
-    this.initQuestions();
+    // 如果有传入任务ID，后续可据此拉取不同题库
+    // const { taskId } = options; 
+    this.fetchQuestions();
   },
 
-  initQuestions() {
-    this.setData({
-      questions: questions,
-      totalQuestions: questions.length,
-      currentIndex: 0,
-      progress: (1 / questions.length) * 100,
-      answers: {}
-    });
+  fetchQuestions() {
+    wx.showLoading({ title: '加载题目中...' });
+    const db = wx.cloud.database();
+    
+    db.collection('assessment_questions')
+      .orderBy('order', 'asc') // 按 order 字段升序排列
+      .get()
+      .then(res => {
+        wx.hideLoading();
+        if (res.data && res.data.length > 0) {
+          this.setData({
+            questions: res.data,
+            totalQuestions: res.data.length,
+            currentIndex: 0,
+            progress: (1 / res.data.length) * 100,
+            answers: {},
+            isLoading: false
+          });
+        } else {
+          wx.showToast({ title: '暂无题目数据', icon: 'none' });
+          this.setData({ isLoading: false });
+        }
+      })
+      .catch(err => {
+        wx.hideLoading();
+        console.error('Failed to fetch questions', err);
+        wx.showToast({ title: '题目加载失败', icon: 'none' });
+        this.setData({ isLoading: false });
+      });
+  },
+  
+  // 重新开始
+  retryLoad() {
+    this.fetchQuestions();
   },
 
   // 选择选项
   selectOption(e) {
+    if (this.data.isLoading) return;
+    
     const { value } = e.currentTarget.dataset;
     const { currentIndex, questions, answers } = this.data;
     const currentQuestion = questions[currentIndex];
     
-    // 记录答案
-    const newAnswers = { ...answers, [currentQuestion.id]: value };
+    // 记录答案，使用数据库中的 _id 作为 key
+    const newAnswers = { ...answers, [currentQuestion._id]: value };
     
     this.setData({
       answers: newAnswers
     });
 
-    // 自动跳转下一题 (可选体验优化，延迟 300ms)
+    // 自动跳转下一题 (延迟 300ms)
     setTimeout(() => {
       if (currentIndex < this.data.totalQuestions - 1) {
         this.nextQuestion();
@@ -98,7 +76,18 @@ Page({
 
   // 下一题
   nextQuestion() {
-    const { currentIndex, totalQuestions } = this.data;
+    const { currentIndex, totalQuestions, questions, answers } = this.data;
+    const currentQuestionId = questions[currentIndex]._id;
+
+    // 校验当前题是否已作答
+    if (!answers[currentQuestionId]) {
+      wx.showToast({
+        title: '请先选择一个选项',
+        icon: 'none'
+      });
+      return;
+    }
+
     if (currentIndex < totalQuestions - 1) {
       const newIndex = currentIndex + 1;
       this.setData({
@@ -134,16 +123,38 @@ Page({
     }
 
     this.setData({ isSubmitting: true });
+    wx.showLoading({ title: 'AI 正在深入分析...', mask: true });
 
-    // 模拟提交过程
-    setTimeout(() => {
+    // 调用云函数生成报告
+    wx.cloud.callFunction({
+      name: 'analyzeAssessment',
+      data: {
+        answers: answers
+      }
+    }).then(res => {
+      wx.hideLoading();
       this.setData({ isSubmitting: false });
       
-      // 跳转到结果页 (将答案传递过去，实际开发中通常是存云数据库)
-      // 这里简单起见，直接跳过去，结果页先做假数据展示
-      wx.navigateTo({
-        url: '/pages/assessment/result/index',
+      if (res.result && res.result.success) {
+        // 跳转到结果页并传递 resultId
+        wx.navigateTo({
+          url: `/pages/assessment/result/index?id=${res.result.resultId}`,
+        });
+      } else {
+        console.error('Analysis failed:', res);
+        wx.showToast({
+          title: '分析失败，请重试',
+          icon: 'none'
+        });
+      }
+    }).catch(err => {
+      wx.hideLoading();
+      this.setData({ isSubmitting: false });
+      console.error('Cloud function error:', err);
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none'
       });
-    }, 1500);
+    });
   }
 })

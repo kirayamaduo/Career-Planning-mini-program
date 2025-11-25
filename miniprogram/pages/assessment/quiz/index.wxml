@@ -16,14 +16,14 @@
     
     <view class="options-list">
       <view 
-        class="option-item {{answers[questions[currentIndex].id] === item.value ? 'selected' : ''}}" 
+        class="option-item {{answers[questions[currentIndex]._id] === item.value ? 'selected' : ''}}" 
         wx:for="{{questions[currentIndex].options}}" 
         wx:key="value"
         bindtap="selectOption"
         data-value="{{item.value}}"
       >
         <view class="option-radio">
-          <view class="radio-dot" wx:if="{{answers[questions[currentIndex].id] === item.value}}"></view>
+          <view class="radio-dot" wx:if="{{answers[questions[currentIndex]._id] === item.value}}"></view>
         </view>
         <view class="option-text">{{item.label}}</view>
       </view>

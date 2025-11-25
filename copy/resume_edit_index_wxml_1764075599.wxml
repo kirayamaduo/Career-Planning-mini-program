@@ -1,0 +1,65 @@
+<view class="page-container">
+  <!-- 1. 顶部品牌引导区 (自定义导航栏适配) -->
+  <view class="brand-header" style="padding-top: {{navHeight}}px;">
+    <view class="nav-bar" style="top: {{statusBarHeight}}px; height: {{navHeight - statusBarHeight}}px;">
+      <view class="back-btn" bindtap="handleBack">
+        <text class="back-icon">❮</text>
+      </view>
+    </view>
+
+    <view class="header-content">
+      <view class="header-title">AI 简历诊断</view>
+      <view class="header-sub">粘贴简历内容，3秒生成专业分析报告</view>
+    </view>
+    <view class="header-deco"></view>
+  </view>
+
+  <!-- 2. 输入卡片 (纸张感) -->
+  <view class="editor-wrapper">
+    <view class="paper-card">
+      <view class="toolbar">
+        <view class="toolbar-title">简历内容</view>
+        <view class="paste-action" bindtap="handlePasteClipboard">
+          <text class="icon">📋</text> 一键粘贴
+        </view>
+      </view>
+      
+      <textarea 
+        class="resume-textarea" 
+        placeholder="{{placeholderText}}" 
+        placeholder-class="placeholder-style"
+        maxlength="5000"
+        value="{{content}}"
+        bindinput="handleInput"
+        show-confirm-bar="{{false}}"
+      ></textarea>
+
+      <view class="footer-status">
+        <view class="word-count {{content.length > 4500 ? 'warning' : ''}}">
+          {{content.length}}/5000 字
+        </view>
+      </view>
+    </view>
+
+    <!-- 3. 小贴士卡片 -->
+    <view class="tips-box">
+      <view class="tips-icon">💡</view>
+      <view class="tips-content">
+        <view class="tips-title">优化建议</view>
+        <view class="tips-text">AI 建议包含完整的项目经历、工作成果（使用数据量化）以及核心技能关键词，评分会更准确。</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4. 底部悬浮操作台 -->
+  <view class="bottom-bar">
+    <button 
+      class="btn-primary {{content.length > 0 ? '' : 'disabled'}}" 
+      disabled="{{content.length === 0}}" 
+      bindtap="startAnalysis"
+      hover-class="{{content.length > 0 ? 'btn-hover' : ''}}"
+    >
+      开始全维诊断
+    </button>
+  </view>
+</view>

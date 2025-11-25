@@ -1,8 +1,23 @@
 <view class="diagnosis-page">
   <!-- 加载状态 -->
   <view wx:if="{{loading}}" class="loading-container">
-    <view class="loading-spinner"></view>
-    <view class="loading-text">AI 正在深度分析您的简历...</view>
+    <view class="loading-content">
+      <view class="loading-icon">🤖</view>
+      <view class="loading-title">AI 深度分析中</view>
+      
+      <!-- 进度条 -->
+      <view class="progress-wrapper">
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{progress}}%"></view>
+        </view>
+        <view class="progress-info">
+          <text class="progress-text">{{progressText}}</text>
+          <text class="progress-percent">{{progress}}%</text>
+        </view>
+      </view>
+      
+      <view class="loading-tip">预计需要 10-20 秒，请耐心等待...</view>
+    </view>
   </view>
 
   <!-- 诊断结果 -->

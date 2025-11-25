@@ -1,0 +1,248 @@
+<view class="page-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header" style="padding-top: {{statusBarHeight}}px; height: {{navHeight}}px;">
+    <view class="nav-back" bindtap="handleBack">
+      <text class="back-icon">❮</text>
+    </view>
+    <view class="nav-title">{{isEdit ? '编辑简历' : '新建简历'}}</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentSection === 'basic' ? 'active' : ''}}" bindtap="switchSection" data-section="basic">
+      <text class="tab-icon">👤</text>
+      <text class="tab-text">基本信息</text>
+    </view>
+    <view class="tab-item {{currentSection === 'job' ? 'active' : ''}}" bindtap="switchSection" data-section="job">
+      <text class="tab-icon">💼</text>
+      <text class="tab-text">求职意向</text>
+    </view>
+    <view class="tab-item {{currentSection === 'education' ? 'active' : ''}}" bindtap="switchSection" data-section="education">
+      <text class="tab-icon">🎓</text>
+      <text class="tab-text">教育背景</text>
+    </view>
+    <view class="tab-item {{currentSection === 'work' ? 'active' : ''}}" bindtap="switchSection" data-section="work">
+      <text class="tab-icon">💻</text>
+      <text class="tab-text">工作经验</text>
+    </view>
+    <view class="tab-item {{currentSection === 'other' ? 'active' : ''}}" bindtap="switchSection" data-section="other">
+      <text class="tab-icon">⭐</text>
+      <text class="tab-text">其他</text>
+    </view>
+  </view>
+
+  <!-- 表单内容区 -->
+  <scroll-view scroll-y class="form-content">
+    
+    <!-- 基本信息 -->
+    <view class="section-panel" wx:if="{{currentSection === 'basic'}}">
+      <view class="form-group">
+        <view class="form-label required">姓名</view>
+        <input class="form-input" placeholder="请输入姓名" value="{{resumeData.name}}" data-field="name" bindinput="handleFieldInput" />
+      </view>
+      
+      <view class="form-row">
+        <view class="form-group half">
+          <view class="form-label">年龄</view>
+          <input class="form-input" type="number" placeholder="27" value="{{resumeData.age}}" data-field="age" bindinput="handleFieldInput" />
+        </view>
+        <view class="form-group half">
+          <view class="form-label">性别</view>
+          <picker mode="selector" range="{{genders}}" value="{{resumeData.gender === '男' ? 0 : 1}}" data-field="gender" data-options="genders" bindchange="handlePickerChange">
+            <view class="form-input picker">{{resumeData.gender}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="form-row">
+        <view class="form-group half">
+          <view class="form-label">城市</view>
+          <input class="form-input" placeholder="上海" value="{{resumeData.city}}" data-field="city" bindinput="handleFieldInput" />
+        </view>
+        <view class="form-group half">
+          <view class="form-label">工作年限</view>
+          <input class="form-input" placeholder="4年经验" value="{{resumeData.yearsOfWork}}" data-field="yearsOfWork" bindinput="handleFieldInput" />
+        </view>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">联系电话</view>
+        <input class="form-input" type="number" placeholder="15888888880" value="{{resumeData.phone}}" data-field="phone" bindinput="handleFieldInput" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">邮箱</view>
+        <input class="form-input" placeholder="qmjianli@qq.com" value="{{resumeData.email}}" data-field="email" bindinput="handleFieldInput" />
+      </view>
+    </view>
+
+    <!-- 求职意向 -->
+    <view class="section-panel" wx:if="{{currentSection === 'job'}}">
+      <view class="form-group">
+        <view class="form-label">意向岗位</view>
+        <input class="form-input" placeholder="行政专员" value="{{resumeData.targetPosition}}" data-field="targetPosition" bindinput="handleFieldInput" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">意向城市</view>
+        <input class="form-input" placeholder="上海" value="{{resumeData.targetCity}}" data-field="targetCity" bindinput="handleFieldInput" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">期望薪资</view>
+        <input class="form-input" placeholder="14000/月" value="{{resumeData.expectedSalary}}" data-field="expectedSalary" bindinput="handleFieldInput" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">入职时间</view>
+        <input class="form-input" placeholder="一个月内到岗" value="{{resumeData.availableTime}}" data-field="availableTime" bindinput="handleFieldInput" />
+      </view>
+    </view>
+
+    <!-- 教育背景 -->
+    <view class="section-panel" wx:if="{{currentSection === 'education'}}">
+      <view wx:for="{{resumeData.education}}" wx:key="index" class="item-block">
+        <view class="item-header">
+          <text class="item-title">教育经历 {{index + 1}}</text>
+          <text class="item-delete" wx:if="{{resumeData.education.length > 1}}" bindtap="deleteEducation" data-index="{{index}}">删除</text>
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">时间段</view>
+          <input class="form-input" placeholder="2012-09 ~ 2016-07" value="{{item.timeRange}}" data-field="education[{{index}}].timeRange" bindinput="handleFieldInput" />
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">学校名称</view>
+          <input class="form-input" placeholder="全民简历师范大学" value="{{item.school}}" data-field="education[{{index}}].school" bindinput="handleFieldInput" />
+        </view>
+
+        <view class="form-row">
+          <view class="form-group half">
+            <view class="form-label">专业</view>
+            <input class="form-input" placeholder="工商管理" value="{{item.major}}" data-field="education[{{index}}].major" bindinput="handleFieldInput" />
+          </view>
+          <view class="form-group half">
+            <view class="form-label">学历</view>
+            <picker mode="selector" range="{{degrees}}" data-field="education[{{index}}].degree" data-options="degrees" bindchange="handlePickerChange">
+              <view class="form-input picker">{{item.degree || '请选择'}}</view>
+            </picker>
+          </view>
+        </view>
+
+        <view class="form-row">
+          <view class="form-group half">
+            <view class="form-label">GPA</view>
+            <input class="form-input" placeholder="3.66/4" value="{{item.gpa}}" data-field="education[{{index}}].gpa" bindinput="handleFieldInput" />
+          </view>
+          <view class="form-group half">
+            <view class="form-label">专业成绩</view>
+            <input class="form-input" placeholder="专业前5%" value="{{item.rank}}" data-field="education[{{index}}].rank" bindinput="handleFieldInput" />
+          </view>
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">主修课程</view>
+          <textarea class="form-textarea" placeholder="统计学、微观经济学、统计学..." value="{{item.courses}}" data-field="education[{{index}}].courses" bindinput="handleFieldInput" maxlength="200"></textarea>
+        </view>
+      </view>
+
+      <view class="add-btn" bindtap="addEducation">
+        <text class="add-icon">+</text> 添加教育经历
+      </view>
+    </view>
+
+    <!-- 工作经验 -->
+    <view class="section-panel" wx:if="{{currentSection === 'work'}}">
+      <view wx:for="{{resumeData.workExperience}}" wx:key="index" wx:for-item="work" wx:for-index="workIndex" class="item-block">
+        <view class="item-header">
+          <text class="item-title">工作经历 {{workIndex + 1}}</text>
+          <text class="item-delete" wx:if="{{resumeData.workExperience.length > 1}}" bindtap="deleteWork" data-index="{{workIndex}}">删除</text>
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">时间段</view>
+          <input class="form-input" placeholder="2018-09 ~ 至今" value="{{work.timeRange}}" data-field="workExperience[{{workIndex}}].timeRange" bindinput="handleFieldInput" />
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">公司名称</view>
+          <input class="form-input" placeholder="全民简历科技有限公司" value="{{work.company}}" data-field="workExperience[{{workIndex}}].company" bindinput="handleFieldInput" />
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">职位</view>
+          <input class="form-input" placeholder="行政专员" value="{{work.position}}" data-field="workExperience[{{workIndex}}].position" bindinput="handleFieldInput" />
+        </view>
+
+        <view class="form-group">
+          <view class="form-label">工作内容</view>
+          <view wx:for="{{work.responsibilities}}" wx:key="rIndex" wx:for-item="responsibility" wx:for-index="rIndex" class="responsibility-item">
+            <textarea class="form-textarea small" placeholder="负责本单位行政人事管理和日常事务..." value="{{responsibility}}" data-field="workExperience[{{workIndex}}].responsibilities[{{rIndex}}]" bindinput="handleFieldInput" maxlength="300"></textarea>
+          </view>
+          <view class="add-responsibility" bindtap="addResponsibility" data-work-index="{{workIndex}}">
+            <text class="add-icon-sm">+</text> 添加职责
+          </view>
+        </view>
+      </view>
+
+      <view class="add-btn" bindtap="addWork">
+        <text class="add-icon">+</text> 添加工作经历
+      </view>
+    </view>
+
+    <!-- 其他信息 -->
+    <view class="section-panel" wx:if="{{currentSection === 'other'}}">
+      <!-- 荣誉证书 -->
+      <view class="subsection">
+        <view class="subsection-title">🏆 荣誉证书</view>
+        <view wx:for="{{resumeData.certificates}}" wx:key="index" class="certificate-item">
+          <input class="form-input" placeholder="英语四级，听说读写能力良好..." value="{{item}}" data-field="certificates[{{index}}]" bindinput="handleFieldInput" />
+          <text class="delete-icon" wx:if="{{resumeData.certificates.length > 1}}" bindtap="deleteCertificate" data-index="{{index}}">×</text>
+        </view>
+        <view class="add-btn-sm" bindtap="addCertificate">+ 添加证书</view>
+      </view>
+
+      <!-- 语言能力 -->
+      <view class="subsection">
+        <view class="subsection-title">🗣 语言能力</view>
+        <view class="form-group">
+          <view class="form-label">计算机</view>
+          <textarea class="form-textarea" placeholder="熟练操作Office等常用的办公软件..." value="{{resumeData.skills.computer}}" data-field="skills.computer" bindinput="handleFieldInput" maxlength="200"></textarea>
+        </view>
+        <view class="form-group">
+          <view class="form-label">英语</view>
+          <textarea class="form-textarea" placeholder="通过全国计算机二级考试..." value="{{resumeData.skills.english}}" data-field="skills.english" bindinput="handleFieldInput" maxlength="200"></textarea>
+        </view>
+      </view>
+
+      <!-- 自我评价 -->
+      <view class="subsection">
+        <view class="subsection-title">💬 自我评价</view>
+        <textarea class="form-textarea large" placeholder="工作积极认真，细心负责..." value="{{resumeData.selfEvaluation}}" data-field="selfEvaluation" bindinput="handleFieldInput" maxlength="500"></textarea>
+      </view>
+
+      <!-- 兴趣爱好 -->
+      <view class="subsection">
+        <view class="subsection-title">❤️ 兴趣爱好</view>
+        <view class="hobby-tags">
+          <view wx:for="{{hobbyOptions}}" wx:key="item" 
+                class="hobby-tag {{resumeData.hobbies.indexOf(item) > -1 ? 'active' : ''}}" 
+                bindtap="toggleHobby" 
+                data-hobby="{{item}}">
+            {{item}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-actions">
+    <button class="btn-save" bindtap="handleSave">保存简历</button>
+  </view>
+</view>

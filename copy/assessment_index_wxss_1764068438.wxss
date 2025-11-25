@@ -58,26 +58,14 @@
 
 /* 新增：更精致小巧的按钮样式 */
 .btn-action-sm {
-  background: #1F2937; 
-  color: #fff; 
-  font-size: 24rpx; 
-  font-weight: 600;
-  padding: 10rpx 28rpx !important;
+  background: #1F2937; color: #fff; 
+  font-size: 24rpx; font-weight: 600;
+  padding: 10rpx 28rpx; /* 减小内边距 */
   border-radius: var(--radius-full);
-  line-height: 1.5 !important;
-  margin: 0 !important;
-  min-height: 0 !important;
-  height: auto !important;
-  width: auto !important;
-  border: none;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
-.btn-action-sm::after {
-  border: none;
+  line-height: 1.5; /* 确保文字垂直居中 */
+  margin: 0;
+  min-height: 0; /* 覆盖小程序按钮默认最小高度 */
+  width: auto; /* 覆盖可能的宽度 */
 }
 
 .status-badge { font-size: 22rpx; color: #9CA3AF; background: #E5E7EB; padding: 8rpx 20rpx; 

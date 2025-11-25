@@ -49,7 +49,6 @@
 
 .form-container {
   padding: 30rpx;
-  padding-top: 20rpx;
 }
 
 /* Section块 */

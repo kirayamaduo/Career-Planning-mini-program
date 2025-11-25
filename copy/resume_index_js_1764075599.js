@@ -70,46 +70,11 @@ Page({
 
     const resume = this.data.currentResume;
     
-    // PDF类型的简历无法进行AI诊断
-    if (resume.type === 'pdf') {
-      wx.showToast({
-        title: 'PDF简历暂不支持AI诊断，请使用模板创建',
-        icon: 'none',
-        duration: 2000
-      });
-      return;
-    }
-
-    // 检查是否有内容
-    if (!resume.content || resume.content.trim().length < 50) {
-      wx.showToast({
-        title: '简历内容过少，无法进行诊断',
-        icon: 'none'
-      });
-      return;
-    }
-    
     // 判断是否已经有诊断结果
     if (resume.diagnosisResult && resume.diagnosisResult.fullReport) {
-      // 已有诊断结果，询问是否重新诊断
-      wx.showModal({
-        title: '提示',
-        content: '该简历已有诊断结果，是否重新诊断？',
-        confirmText: '重新诊断',
-        cancelText: '查看结果',
-        success: (res) => {
-          if (res.confirm) {
-            // 重新诊断
-            wx.navigateTo({
-              url: `/pages/resume/diagnosis/index?resumeId=${resume._id}&content=${encodeURIComponent(resume.content)}`
-            });
-          } else {
-            // 查看已有结果
-            wx.navigateTo({
-              url: `/pages/resume/diagnosis/index?resumeId=${resume._id}&viewOnly=true`
-            });
-          }
-        }
+      // 已有诊断结果，直接跳转查看
+      wx.navigateTo({
+        url: `/pages/resume/diagnosis/index?resumeId=${resume._id}`
       });
     } else {
       // 未诊断，进行分析
@@ -144,89 +109,11 @@ Page({
         url: `/pages/resume/edit/index?id=${id}`,
       });
     } else {
-      // 新建简历 - 显示选择创建方式
-      wx.showActionSheet({
-        itemList: ['使用模板填写', '上传PDF简历'],
-        success: (res) => {
-          if (res.tapIndex === 0) {
-            // 使用模板填写
-            wx.navigateTo({
-              url: '/pages/resume/edit/index?type=template',
-            });
-          } else if (res.tapIndex === 1) {
-            // 上传PDF
-            this.handleUploadPdf();
-          }
-        }
+      // 新建简历
+      wx.navigateTo({
+        url: '/pages/resume/edit/index?type=create',
       });
     }
-  },
-
-  // 上传PDF简历
-  handleUploadPdf() {
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'file',
-      extension: ['pdf'],
-      success: async (res) => {
-        const file = res.tempFiles[0];
-        
-        // 检查文件大小（限制10MB）
-        if (file.size > 10 * 1024 * 1024) {
-          wx.showToast({
-            title: '文件过大，请选择小于10MB的PDF',
-            icon: 'none'
-          });
-          return;
-        }
-
-        wx.showLoading({ title: '上传中...' });
-
-        try {
-          // 上传到云存储
-          const cloudPath = `resumes/${Date.now()}_${file.name}`;
-          const uploadRes = await wx.cloud.uploadFile({
-            cloudPath: cloudPath,
-            filePath: file.path
-          });
-
-          // 保存到数据库
-          const db = wx.cloud.database();
-          const addRes = await db.collection('resumes').add({
-            data: {
-              title: file.name.replace('.pdf', ''),
-              type: 'pdf',
-              pdfUrl: uploadRes.fileID,
-              content: '', // PDF类型简历没有文本内容
-              score: 0,
-              grade: '',
-              gradeText: '',
-              createTime: db.serverDate(),
-              updateTime: db.serverDate()
-            }
-          });
-
-          wx.hideLoading();
-          wx.showToast({
-            title: 'PDF上传成功',
-            icon: 'success'
-          });
-
-          // 刷新列表
-          this.loadResumeData();
-        } catch (error) {
-          console.error('上传失败:', error);
-          wx.hideLoading();
-          wx.showToast({
-            title: '上传失败: ' + error.message,
-            icon: 'none'
-          });
-        }
-      },
-      fail: (error) => {
-        console.log('选择文件失败:', error);
-      }
-    });
   },
 
   // 切换当前简历

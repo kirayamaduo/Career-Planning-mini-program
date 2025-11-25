@@ -7,7 +7,9 @@ Page({
     grade: 'B',
     gradeText: '良好',
     fullReport: '',
-    suggestions: []
+    suggestions: [],
+    progress: 0,  // 进度百分比
+    progressText: '正在初始化...'  // 进度文本
   },
 
   onLoad(options) {
@@ -28,10 +30,8 @@ Page({
 
   // 调用云函数分析简历
   async analyzeResume(resumeId, content) {
-    wx.showLoading({
-      title: 'AI 深度分析中...',
-      mask: true
-    });
+    // 开始模拟进度条
+    this.startProgressSimulation();
 
     try {
       const res = await wx.cloud.callFunction({
@@ -45,7 +45,9 @@ Page({
       
       console.log('云函数返回结果:', res);
 
-      wx.hideLoading();
+      // 停止进度模拟，设置为100%
+      this.stopProgressSimulation();
+      this.setData({ progress: 100, progressText: '分析完成！' });
 
       if (res.result.success) {
         const data = res.result.data;
@@ -68,7 +70,7 @@ Page({
       }
     } catch (error) {
       console.error('调用云函数失败:', error);
-      wx.hideLoading();
+      this.stopProgressSimulation();
       this.setData({ loading: false });
       
       // 更详细的错误提示
@@ -148,6 +150,61 @@ Page({
   // 返回简历中心
   handleBackToResume() {
     wx.navigateBack();
+  },
+
+  // 开始进度模拟
+  startProgressSimulation() {
+    this.setData({ 
+      progress: 0,
+      progressText: '正在连接 AI 服务...'
+    });
+
+    let progress = 0;
+    const stages = [
+      { percent: 20, text: '正在分析简历结构...' },
+      { percent: 40, text: '识别关键信息中...' },
+      { percent: 60, text: 'AI 深度评估中...' },
+      { percent: 80, text: '生成优化建议...' },
+      { percent: 95, text: '即将完成...' }
+    ];
+
+    let stageIndex = 0;
+
+    this.progressTimer = setInterval(() => {
+      progress += Math.random() * 5; // 随机增长
+
+      if (progress >= stages[stageIndex].percent && stageIndex < stages.length - 1) {
+        stageIndex++;
+      }
+
+      // 不超过95%，等待真实结果
+      if (progress > 95) {
+        progress = 95;
+      }
+
+      this.setData({
+        progress: Math.floor(progress),
+        progressText: stages[stageIndex].text
+      });
+
+      // 达到95%后停止自动增长
+      if (progress >= 95) {
+        clearInterval(this.progressTimer);
+      }
+    }, 300);
+  },
+
+  // 停止进度模拟
+  stopProgressSimulation() {
+    if (this.progressTimer) {
+      clearInterval(this.progressTimer);
+      this.progressTimer = null;
+    }
+  },
+
+  onUnload() {
+    // 页面卸载时清理定时器
+    this.stopProgressSimulation();
   }
 })
 

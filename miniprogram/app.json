@@ -10,6 +10,7 @@
     "pages/resume/index",
     "pages/resume/edit/index",
     "pages/resume/diagnosis/index",
+    "pages/resume/preview/index",
     "pages/interview/index"
   ],
   "window": {

@@ -17,25 +17,32 @@ Page({
     const db = wx.cloud.database();
     db.collection('assessment_results').doc(id).get().then(res => {
       const aiResult = res.data.result;
+      console.log('[DEBUG] AI Result Data:', aiResult); // 打印完整数据
       
       // 数据适配：将后端返回的 AI 数据转换为前端 UI 需要的格式
-      // 后端返回格式: { keywords, radar, careers, analysis }
+      // 后端返回格式: { mbti, type_name, keywords, radar, careers, analysis }
       
+      // 兼容旧数据：如果 AI 返回里没有 mbti 字段，降级使用 keywords[0]
+      const displayType = aiResult.mbti 
+        ? `${aiResult.mbti} · ${aiResult.type_name}`
+        : (aiResult.keywords[0] || "待定类型");
+
       const adaptedReport = {
-        type: aiResult.keywords[0] || "待定类型", // 取第一个关键词作为类型
+        type: displayType,
         tags: aiResult.keywords,
-        score: 88, // 暂时写死或根据 radar 计算平均分
+        score: 88, // 暂时写死
         dimensions: [
-          { name: "执行力", value: aiResult.radar[0] },
-          { name: "沟通力", value: aiResult.radar[1] },
-          { name: "创造力", value: aiResult.radar[2] },
-          { name: "逻辑力", value: aiResult.radar[3] },
+          // 对应云函数 prompt 定义的 6 个维度
+          { name: "外向 E", value: aiResult.radar[0] },
+          { name: "直觉 N", value: aiResult.radar[1] },
+          { name: "思考 T", value: aiResult.radar[2] },
+          { name: "判断 J", value: aiResult.radar[3] },
           { name: "领导力", value: aiResult.radar[4] }
-          // 忽略最后一个抗压力以适配 UI 5个维度，或者修改 UI
+          // UI 默认只显示 5 个，取前 5 个核心维度
         ],
         careers: aiResult.careers.map(c => ({
           title: c,
-          match: Math.floor(Math.random() * (98 - 85) + 85), // 模拟匹配度
+          match: Math.floor(Math.random() * (98 - 85) + 85),
           desc: "AI 推荐的高匹配度岗位"
         })),
         advice: aiResult.analysis

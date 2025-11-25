@@ -28,17 +28,23 @@ exports.main = async (event, context) => {
       return `题目${key}: 选项${value}`;
     }).join('; ');
 
-    const systemPrompt = `你是一位专业的职业规划师。请根据用户的测评答案，分析其职业性格，并以严格的 JSON 格式返回报告。
-JSON 结构要求如下：
+    const systemPrompt = `你是一位 MBTI 职业性格分析专家。请根据用户的测评答案，精准判断其 MBTI 类型，并返回严格的 JSON 格式报告。
+(Version: v3-debug-mbti)
+
+JSON 示例：
 {
-  "keywords": ["关键词1", "关键词2", "关键词3"],
+  "mbti": "INTJ",
+  "type_name": "建筑师型",
+  "keywords": ["富有远见", "逻辑严密", "独立自主"],
   "radar": [80, 70, 60, 85, 75, 65],
-  "careers": ["推荐岗位1", "推荐岗位2"],
-  "analysis": "详细的性格分析与职业建议文案（300字以内）"
+  "careers": ["系统架构师", "后端开发"],
+  "analysis": "..."
 }
-注意：
-1. radar 数组必须包含6个数值（0-100），分别代表：执行力、沟通力、创造力、逻辑力、领导力、抗压力。
-2. 请直接返回 JSON 字符串，不要包含 markdown 格式化标记（如 \`\`\`json）。`;
+
+要求：
+1. 必须包含 mbti (4字母) 和 type_name (中文) 字段。
+2. radar 对应维度：外向E, 直觉N, 思考T, 判断J, 领导力, 抗压力。
+3. 仅返回 JSON 字符串。`;
 
     // 2. 调用 Qwen-Omni
     const completion = await openai.chat.completions.create({
@@ -88,7 +94,10 @@ JSON 结构要求如下：
         _openid: openid,
         createTime: db.serverDate(),
         answers: answers,
-        result: resultData
+        result: {
+          ...resultData,
+          _debug_version: "v3-debug-mbti" // 强制打上版本标签
+        }
       }
     });
 

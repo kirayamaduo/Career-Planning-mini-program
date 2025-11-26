@@ -1,0 +1,11 @@
+{
+  "name": "interviewAssistant",
+  "version": "1.0.0",
+  "description": "AI Interview Assistant Cloud Function",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "openai": "^4.20.0"
+  }
+}
+

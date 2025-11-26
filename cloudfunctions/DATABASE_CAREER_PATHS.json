@@ -1,0 +1,238 @@
+[
+  {
+    "_id": "frontend",
+    "name": "前端开发",
+    "icon": "</>",
+    "currentLevel": "Lv.2",
+    "experience": "2年",
+    "branches": [
+      {
+        "name": "架构师",
+        "emoji": "架",
+        "angle": -35,
+        "distance": 200,
+        "unlocked": true,
+        "description": "负责前端架构设计与技术选型"
+      },
+      {
+        "name": "全栈",
+        "emoji": "全",
+        "angle": 145,
+        "distance": 200,
+        "unlocked": true,
+        "description": "掌握前后端全栈开发能力"
+      },
+      {
+        "name": "资深前端",
+        "emoji": "?",
+        "angle": 50,
+        "distance": 150,
+        "unlocked": false,
+        "description": "深入掌握前端进阶技术"
+      },
+      {
+        "name": "技术主管",
+        "emoji": "?",
+        "angle": 210,
+        "distance": 150,
+        "unlocked": false,
+        "description": "带领团队进行技术攻坚"
+      }
+    ],
+    "nextGoal": {
+      "step": 1,
+      "title": "掌握 Node.js 高级特性",
+      "subtitle": "后端基础",
+      "status": "进行中"
+    }
+  },
+  {
+    "_id": "backend",
+    "name": "后端开发",
+    "icon": "⚙️",
+    "currentLevel": "Lv.1",
+    "experience": "1年",
+    "branches": [
+      {
+        "name": "系统架构师",
+        "emoji": "系",
+        "angle": -30,
+        "distance": 220,
+        "unlocked": false,
+        "description": "设计高可用分布式系统"
+      },
+      {
+        "name": "DevOps",
+        "emoji": "运",
+        "angle": 140,
+        "distance": 180,
+        "unlocked": true,
+        "description": "自动化运维与部署"
+      },
+      {
+        "name": "数据架构师",
+        "emoji": "数",
+        "angle": 60,
+        "distance": 200,
+        "unlocked": false,
+        "description": "数据库设计与优化专家"
+      },
+      {
+        "name": "安全专家",
+        "emoji": "?",
+        "angle": 220,
+        "distance": 150,
+        "unlocked": false,
+        "description": "系统安全防护"
+      }
+    ],
+    "nextGoal": {
+      "step": 1,
+      "title": "深入学习数据库优化",
+      "subtitle": "性能调优",
+      "status": "进行中"
+    }
+  },
+  {
+    "_id": "product",
+    "name": "产品经理",
+    "icon": "📱",
+    "currentLevel": "Lv.2",
+    "experience": "2年",
+    "branches": [
+      {
+        "name": "产品总监",
+        "emoji": "总",
+        "angle": -40,
+        "distance": 210,
+        "unlocked": true,
+        "description": "统筹产品线战略规划"
+      },
+      {
+        "name": "增长专家",
+        "emoji": "增",
+        "angle": 130,
+        "distance": 190,
+        "unlocked": true,
+        "description": "用户增长与数据分析"
+      },
+      {
+        "name": "UX专家",
+        "emoji": "?",
+        "angle": 45,
+        "distance": 160,
+        "unlocked": false,
+        "description": "用户体验设计专家"
+      },
+      {
+        "name": "项目管理",
+        "emoji": "?",
+        "angle": 200,
+        "distance": 150,
+        "unlocked": false,
+        "description": "敏捷项目管理"
+      }
+    ],
+    "nextGoal": {
+      "step": 1,
+      "title": "学习数据分析方法论",
+      "subtitle": "增长黑客",
+      "status": "未开始"
+    }
+  },
+  {
+    "_id": "design",
+    "name": "UI设计",
+    "icon": "🎨",
+    "currentLevel": "Lv.1",
+    "experience": "1年",
+    "branches": [
+      {
+        "name": "设计总监",
+        "emoji": "设",
+        "angle": -35,
+        "distance": 200,
+        "unlocked": false,
+        "description": "领导设计团队与品牌"
+      },
+      {
+        "name": "交互设计师",
+        "emoji": "交",
+        "angle": 150,
+        "distance": 180,
+        "unlocked": true,
+        "description": "用户交互体验设计"
+      },
+      {
+        "name": "视觉设计师",
+        "emoji": "视",
+        "angle": 50,
+        "distance": 190,
+        "unlocked": true,
+        "description": "视觉创意与品牌设计"
+      },
+      {
+        "name": "动效设计",
+        "emoji": "?",
+        "angle": 210,
+        "distance": 150,
+        "unlocked": false,
+        "description": "动画与交互动效"
+      }
+    ],
+    "nextGoal": {
+      "step": 1,
+      "title": "掌握 Figma 高级功能",
+      "subtitle": "设计工具",
+      "status": "进行中"
+    }
+  },
+  {
+    "_id": "operation",
+    "name": "运营",
+    "icon": "📊",
+    "currentLevel": "Lv.2",
+    "experience": "2年",
+    "branches": [
+      {
+        "name": "运营总监",
+        "emoji": "运",
+        "angle": -30,
+        "distance": 210,
+        "unlocked": true,
+        "description": "运营策略与团队管理"
+      },
+      {
+        "name": "内容运营",
+        "emoji": "内",
+        "angle": 140,
+        "distance": 180,
+        "unlocked": true,
+        "description": "内容策划与创作"
+      },
+      {
+        "name": "用户运营",
+        "emoji": "用",
+        "angle": 60,
+        "distance": 190,
+        "unlocked": true,
+        "description": "用户增长与留存"
+      },
+      {
+        "name": "社群运营",
+        "emoji": "?",
+        "angle": 220,
+        "distance": 150,
+        "unlocked": false,
+        "description": "社群建设与维护"
+      }
+    ],
+    "nextGoal": {
+      "step": 1,
+      "title": "提升数据分析能力",
+      "subtitle": "精细化运营",
+      "status": "进行中"
+    }
+  }
+]
+

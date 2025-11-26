@@ -1,0 +1,100 @@
+<view class="result-page">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header" style="padding-top: {{statusBarHeight}}px; height: {{navHeight}}px;">
+    <view class="nav-back" bindtap="handleBack">
+      <text class="back-icon">❮</text>
+    </view>
+    <view class="nav-title">面试结果</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view scroll-y class="result-content" style="padding-top: {{navHeight}}px;">
+    <view class="container">
+      
+      <view wx:if="{{loading}}" class="loading-container">
+        <view class="loading-text">加载中...</view>
+      </view>
+
+      <view wx:else>
+        <!-- 分数卡片 -->
+        <view class="score-card">
+          <view class="score-header">
+            <view class="score-main">
+              <text class="score-num">{{score}}</text>
+              <text class="score-total">/100</text>
+            </view>
+            <view class="grade-badge grade-{{grade}}">
+              <text class="grade-text">{{grade}}</text>
+              <text class="grade-label">{{gradeText}}</text>
+            </view>
+          </view>
+          <view class="score-desc">你的简历已超过 {{score}}% 的求职者</view>
+        </view>
+
+        <!-- 能力评估 -->
+        <view class="dimensions-card">
+          <view class="section-title">
+            <view class="title-icon">📊</view>
+            <text class="title-text">能力评估</text>
+          </view>
+          <view class="dimensions-list">
+            <view wx:for="{{dimensions}}" wx:key="name" class="dimension-item">
+              <view class="dimension-header">
+                <text class="dimension-name">{{item.name}}</text>
+                <text class="dimension-score">{{item.score}}</text>
+              </view>
+              <view class="dimension-bar">
+                <view class="dimension-fill" style="width: {{item.score}}%"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 面试官点评 -->
+        <view class="feedback-card">
+          <view class="section-title">
+            <view class="title-icon">📝</view>
+            <text class="title-text">面试官点评</text>
+          </view>
+          <text class="feedback-text">{{feedback}}</text>
+        </view>
+
+        <!-- 改进建议 -->
+        <view class="suggestions-card">
+          <view class="section-title">
+            <view class="title-icon">💡</view>
+            <text class="title-text">改进建议</text>
+          </view>
+          <view class="suggestions-list">
+            <view wx:for="{{suggestions}}" wx:key="index" class="suggestion-item">
+              <view class="suggestion-bullet">{{index + 1}}</view>
+              <text class="suggestion-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 查看对话按钮 -->
+        <view class="conversation-card" bindtap="viewConversation">
+          <view class="conversation-icon">💬</view>
+          <view class="conversation-text">
+            <view class="conversation-title">查看完整对话</view>
+            <view class="conversation-desc">回顾面试问答内容</view>
+          </view>
+          <view class="arrow-icon">›</view>
+        </view>
+
+        <!-- 底部占位 -->
+        <view class="bottom-placeholder"></view>
+      </view>
+
+    </view>
+  </scroll-view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-actions" wx:if="{{!loading}}">
+    <button class="btn-secondary" bindtap="backToHome">返回首页</button>
+    <button class="btn-primary" bindtap="startAgain">再来一次</button>
+  </view>
+</view>
+

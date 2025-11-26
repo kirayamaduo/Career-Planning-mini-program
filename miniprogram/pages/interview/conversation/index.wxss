@@ -1,0 +1,127 @@
+/* pages/interview/conversation/index.wxss */
+.page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding-bottom: 100rpx;
+}
+
+/* Header */
+.header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 80rpx 40rpx 40rpx;
+  border-bottom: 2rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.header-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.info-item {
+  padding: 0 10rpx;
+}
+
+.info-divider {
+  opacity: 0.5;
+}
+
+/* Conversation area */
+.conversation-area {
+  height: calc(100vh - 240rpx);
+  padding: 40rpx 30rpx;
+}
+
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+/* Message block */
+.message-block {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.message-ai {
+  border-left: 6rpx solid #667eea;
+}
+
+.message-user {
+  border-left: 6rpx solid #48bb78;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.message-role {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.message-ai .message-role {
+  color: #667eea;
+}
+
+.message-user .message-role {
+  color: #48bb78;
+}
+
+.message-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.message-content {
+  font-size: 30rpx;
+  line-height: 1.8;
+  color: #333;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Footer tip */
+.footer-tip {
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 20rpx 40rpx;
+  border-radius: 100rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.tip-icon {
+  font-size: 28rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+

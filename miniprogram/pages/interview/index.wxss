@@ -2,6 +2,9 @@
 .gradient-dark {
   background: linear-gradient(135deg, #1E1B4B 0%, #4338CA 100%);
 }
+.gradient-orange {
+  background: linear-gradient(135deg, #EA580C 0%, #F59E0B 100%);
+}
 .hero-bg-overlay {
   position: absolute; top: 0;
   right: 0; width: 300rpx; height: 300rpx;
@@ -23,6 +26,12 @@
 .hero-tag-red::before {
   content: ''; width: 8rpx; height: 8rpx; background: white; border-radius: 50%;
   margin-right: 10rpx;
+}
+.hero-tag-orange {
+  background: rgba(255,255,255,0.25); color: white; font-weight: bold; font-size: 20rpx;
+  padding: 6rpx 16rpx; 
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; line-height: 1;
 }
 .hero-time { 
   font-size: 26rpx; opacity: 0.9; font-weight: 500; letter-spacing: 1rpx; color: white; 
@@ -71,4 +80,24 @@
   background: #F3F4F6; color: var(--text-sub); font-size: 24rpx; font-weight: 600;
   padding: 8rpx 20rpx;
   border-radius: var(--radius-sm);
+}
+
+/* Empty state */
+.empty-hint {
+  padding: 80rpx 40rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-sub);
+  margin-bottom: 12rpx;
+}
+
+.empty-subtext {
+  font-size: 24rpx;
+  color: #9CA3AF;
 }

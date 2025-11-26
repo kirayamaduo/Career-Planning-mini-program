@@ -1,0 +1,34 @@
+<view class="prepare-page">
+  <view class="prepare-container">
+    <view class="prepare-icon">🎯</view>
+    <view class="prepare-title">面试即将开始</view>
+    
+    <view class="prepare-info">
+      <view class="info-item">
+        <text class="info-label">岗位：</text>
+        <text class="info-value">{{positionName}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">难度：</text>
+        <text class="info-value">{{level}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">类型：</text>
+        <text class="info-value">{{typeName}}</text>
+      </view>
+    </view>
+
+    <view class="prepare-tips">
+      <view class="tip-item">📌 请保持网络畅通</view>
+      <view class="tip-item">📌 建议找一个安静的环境</view>
+      <view class="tip-item">📌 认真思考后再回答</view>
+    </view>
+
+    <view class="countdown-circle">
+      <text class="countdown-number">{{countdown}}</text>
+    </view>
+
+    <button class="btn-skip" bindtap="skipCountdown">立即开始</button>
+  </view>
+</view>
+

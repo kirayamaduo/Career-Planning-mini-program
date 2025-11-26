@@ -1,0 +1,39 @@
+<!--pages/interview/conversation/index.wxml-->
+<view class="page-container">
+  <!-- Header -->
+  <view class="header">
+    <view class="header-title">面试对话记录</view>
+    <view class="header-info">
+      <text class="info-item">{{interviewInfo.position}}</text>
+      <text class="info-divider">·</text>
+      <text class="info-item">{{interviewInfo.level}}</text>
+      <text class="info-divider">·</text>
+      <text class="info-item">{{interviewInfo.type}}</text>
+    </view>
+  </view>
+
+  <!-- Messages -->
+  <scroll-view scroll-y class="conversation-area">
+    <view class="conversation-list">
+      <view 
+        class="message-block {{item.role === 'ai' ? 'message-ai' : 'message-user'}}"
+        wx:for="{{messages}}"
+        wx:key="id">
+        <view class="message-header">
+          <view class="message-role">{{item.role === 'ai' ? '面试官' : '我'}}</view>
+          <view class="message-time">{{item.time}}</view>
+        </view>
+        <view class="message-content" bindlongpress="copyContent" data-content="{{item.content}}">
+          {{item.content}}
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- Footer tip -->
+  <view class="footer-tip">
+    <text class="tip-icon">💡</text>
+    <text class="tip-text">长按消息可复制内容</text>
+  </view>
+</view>
+

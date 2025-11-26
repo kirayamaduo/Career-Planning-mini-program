@@ -143,26 +143,36 @@
   justify-content: center; font-weight: bold; font-size: 26rpx;
 }
 
-/* 职业选择器样式 */
+/* 职业选择器样式 - 优化版 */
 .career-picker {
   display: flex;
   align-items: center;
-  gap: 8rpx;
-  padding: 12rpx 24rpx;
-  background: #F3F4F6;
-  border-radius: 20rpx;
+  gap: 12rpx;
+  padding: 16rpx 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
   cursor: pointer;
+  min-width: 200rpx;
+  transition: all 0.3s ease;
+}
+
+.career-picker:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.2);
 }
 
 .picker-text {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: var(--primary);
+  font-size: 32rpx;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1rpx;
 }
 
 .picker-icon {
-  font-size: 20rpx;
-  color: var(--primary);
+  font-size: 24rpx;
+  color: white;
+  opacity: 0.9;
 }
 
 /* 加载状态 */

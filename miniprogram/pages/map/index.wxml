@@ -26,7 +26,8 @@
             <view class="sub-text mt-2">{{currentCareer.currentLevel}} | 经验 {{currentCareer.experience}}</view>
           </view>
         </view>
-        <view class="icon-btn-light" bindtap="editCareer">✏️</view>
+        <!-- 编辑功能暂时隐藏，待后续版本完善 -->
+        <!-- <view class="icon-btn-light" bindtap="editCareer">✏️</view> -->
       </view>
 
       <!-- 能力图谱 -->

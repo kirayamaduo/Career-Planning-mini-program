@@ -1,28 +1,36 @@
 <view class="page-wrapper {{isPageActive ? 'page-active' : ''}}">
   <view class="top-bar">
     <view class="title-lg">职业地图</view>
-    <view class="coin-pill">
-      <text class="coin-symbol">¥</text>
-      <text class="coin-val">2,380</text>
-      <image class="avatar-xs" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"></image>
-    </view>
+    <picker mode="selector" range="{{careerOptions}}" range-key="name" value="{{selectedIndex}}" bindchange="onCareerChange">
+      <view class="career-picker">
+        <text class="picker-text">{{careerOptions[selectedIndex].name}}</text>
+        <text class="picker-icon">▼</text>
+      </view>
+    </picker>
   </view>
 
   <scroll-view scroll-y class="page-content">
     <view class="container">
       
-      <view class="card flex-between">
-        <view class="flex-row">
-          <view class="job-icon-box">&lt;/&gt;</view>
-          <view class="ml-3">
-            <view class="title-md">前端工程师</view>
-            <view class="sub-text mt-2">Lv.2 | 经验 2年</view>
-          </view>
-        </view>
-        <view class="icon-btn-light">✏️</view>
+      <!-- Loading 状态 -->
+      <view wx:if="{{loading}}" class="loading-wrapper">
+        <view class="loading-text">加载中...</view>
       </view>
 
-      <view class="map-card-container">
+      <!-- 职业信息卡片 -->
+      <view wx:if="{{!loading && currentCareer}}" class="card flex-between">
+        <view class="flex-row">
+          <view class="job-icon-box">{{currentCareer.icon}}</view>
+          <view class="ml-3">
+            <view class="title-md">{{currentCareer.name}}</view>
+            <view class="sub-text mt-2">{{currentCareer.currentLevel}} | 经验 {{currentCareer.experience}}</view>
+          </view>
+        </view>
+        <view class="icon-btn-light" bindtap="editCareer">✏️</view>
+      </view>
+
+      <!-- 能力图谱 -->
+      <view wx:if="{{!loading && currentCareer}}" class="map-card-container">
         <view class="map-header">
           <text class="map-title">能力图谱</text>
           <view class="map-legend">
@@ -32,60 +40,63 @@
 
         <view class="mindmap-wrapper">
           
+          <!-- 中心核心 -->
           <view class="core-center">
-            <view class="core-inner">&lt;/&gt;</view>
+            <view class="core-inner">{{currentCareer.icon}}</view>
             <view class="core-halo"></view>
           </view>
 
-          <view class="branch-ray" style="transform: rotate(-35deg); --branch-length: 200rpx;">
-            <view class="branch-line" style="--branch-length: 200rpx;"></view>
-            <view class="node-item" style="--node-offset: 260rpx;">
-              <view class="node-circle">架</view>
-              <text class="node-text">架构师</text>
+          <!-- 动态渲染分支节点 -->
+          <block wx:for="{{currentCareer.branches}}" wx:key="name">
+            <view class="branch-ray" 
+                  style="transform: rotate({{item.angle}}deg); --branch-length: {{item.distance}}rpx; opacity: {{item.unlocked ? 1 : 0.6}};"
+                  bindtap="onNodeTap"
+                  data-node="{{item}}">
+              <view class="branch-line {{item.unlocked ? '' : 'dashed'}}" style="--branch-length: {{item.distance}}rpx;"></view>
+              <view class="node-item" style="--node-offset: {{item.distance + 60}}rpx;">
+                <view class="node-circle {{item.unlocked ? '' : 'small'}}">{{item.emoji}}</view>
+                <text wx:if="{{item.unlocked}}" class="node-text">{{item.name}}</text>
+              </view>
             </view>
-          </view>
-
-          <view class="branch-ray" style="transform: rotate(145deg); --branch-length: 200rpx;">
-            <view class="branch-line" style="--branch-length: 200rpx;"></view>
-            <view class="node-item" style="--node-offset: 260rpx;">
-              <view class="node-circle">全</view>
-              <text class="node-text">全栈</text>
-            </view>
-          </view>
-
-          <view class="branch-ray" style="transform: rotate(210deg); --branch-length: 150rpx; opacity: 0.6;">
-             <view class="branch-line dashed" style="--branch-length: 150rpx;"></view>
-             <view class="node-item" style="--node-offset: 210rpx;">
-               <view class="node-circle small">?</view>
-             </view>
-          </view>
-
-           <view class="branch-ray" style="transform: rotate(50deg); --branch-length: 150rpx; opacity: 0.6;">
-             <view class="branch-line dashed" style="--branch-length: 150rpx;"></view>
-             <view class="node-item" style="--node-offset: 210rpx;">
-               <view class="node-circle small">?</view>
-             </view>
-          </view>
+          </block>
 
         </view>
       </view>
 
-      <view class="section-header mb-3 mt-4">
+      <!-- 下一阶段目标 -->
+      <view wx:if="{{!loading && currentCareer && currentCareer.nextGoal}}" class="section-header mb-3 mt-4">
         <text class="title-md">下一阶段目标</text>
       </view>
-      <view class="card">
+      <view wx:if="{{!loading && currentCareer && currentCareer.nextGoal}}" class="card">
         <view class="flex-between">
           <view class="flex-row">
-            <view class="step-circle">1</view>
+            <view class="step-circle">{{currentCareer.nextGoal.step}}</view>
             <view class="ml-3">
-              <view class="text-bold">掌握 Node.js 高级特性</view>
-              <view class="sub-text">后端基础</view>
+              <view class="text-bold">{{currentCareer.nextGoal.title}}</view>
+              <view class="sub-text">{{currentCareer.nextGoal.subtitle}}</view>
             </view>
           </view>
-          <text class="text-xs text-primary">进行中</text>
+          <text class="text-xs text-primary">{{currentCareer.nextGoal.status}}</text>
         </view>
       </view>
 
     </view>
   </scroll-view>
+
+  <!-- 节点详情弹窗 -->
+  <view wx:if="{{showNodeDetail}}" class="modal-mask" bindtap="closeNodeDetail">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <text class="modal-title">{{selectedNode.name}}</text>
+        <view class="close-btn" bindtap="closeNodeDetail">✕</view>
+      </view>
+      <view class="modal-body">
+        <view class="modal-icon">{{selectedNode.emoji}}</view>
+        <view class="modal-desc">{{selectedNode.description}}</view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn-primary" bindtap="closeNodeDetail">知道了</button>
+      </view>
+    </view>
+  </view>
 </view>

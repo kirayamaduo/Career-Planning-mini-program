@@ -1,0 +1,88 @@
+<view class="chat-page">
+  <!-- 顶部导航栏 -->
+  <view class="chat-header" style="padding-top: {{statusBarHeight}}px; height: {{navHeight}}px;">
+    <view class="interviewer-info">
+      <image class="avatar-sm" src="{{interviewerAvatar}}"></image>
+      <text class="interviewer-name">面试官</text>
+    </view>
+    <view class="question-count">{{questionCount}}/{{totalQuestions}}</view>
+    <view class="btn-camera" bindtap="toggleCamera">
+      <text class="camera-icon">{{cameraEnabled ? '📹' : '📷'}}</text>
+    </view>
+    <view class="btn-end" bindtap="confirmEnd">结束</view>
+  </view>
+
+  <!-- Camera preview (floating) -->
+  <view class="camera-container {{cameraEnabled ? 'camera-show' : 'camera-hide'}}">
+    <camera 
+      wx:if="{{cameraEnabled}}"
+      class="camera-preview" 
+      device-position="front" 
+      flash="off"
+      binderror="onCameraError">
+    </camera>
+    <view class="camera-tip" wx:if="{{cameraEnabled}}">
+      <text>您的镜头预览</text>
+    </view>
+  </view>
+
+  <!-- 对话区域 -->
+  <scroll-view scroll-y 
+               class="chat-area" 
+               scroll-into-view="{{scrollToView}}"
+               scroll-with-animation="{{true}}"
+               style="padding-top: {{navHeight}}px;">
+    <view class="messages-container">
+      <view wx:for="{{messages}}" wx:key="id" 
+            id="msg-{{index}}"
+            class="message-wrapper {{item.role === 'ai' ? 'ai-message-wrapper' : 'user-message-wrapper'}}">
+        
+        <!-- AI message -->
+        <view wx:if="{{item.role === 'ai'}}" class="message-row ai-message-row">
+          <image class="msg-avatar" src="{{interviewerAvatar}}"></image>
+          <view class="msg-bubble ai-bubble">
+            <text class="msg-text">{{item.content}}</text>
+            <text class="msg-time">{{item.time}}</text>
+          </view>
+        </view>
+
+        <!-- User message -->
+        <view wx:else class="message-row user-message-row">
+          <view class="msg-bubble user-bubble">
+            <text class="msg-text">{{item.content}}</text>
+            <text class="msg-time">{{item.time}}</text>
+          </view>
+          <image class="msg-avatar" src="{{userAvatar}}"></image>
+        </view>
+      </view>
+
+      <!-- Bottom spacer -->
+      <view class="bottom-spacer"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <textarea class="input-box" 
+              placeholder="请输入你的回答..." 
+              value="{{inputText}}"
+              bindinput="handleInput"
+              auto-height
+              maxlength="500"
+              disabled="{{isThinking}}"></textarea>
+    
+    <view class="input-actions">
+      <view class="btn-voice {{isRecording ? 'recording' : ''}}" 
+            bindtouchstart="startRecord"
+            bindtouchend="stopRecord">
+        <text class="voice-icon">{{isRecording ? '🔴' : '🎤'}}</text>
+      </view>
+      <button class="btn-send" 
+              bindtap="sendAnswer" 
+              disabled="{{!inputText || isThinking}}">
+        发送
+      </button>
+    </view>
+  </view>
+</view>
+

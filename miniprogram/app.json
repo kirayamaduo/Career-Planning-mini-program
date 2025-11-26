@@ -11,7 +11,12 @@
     "pages/resume/edit/index",
     "pages/resume/diagnosis/index",
     "pages/resume/preview/index",
-    "pages/interview/index"
+    "pages/interview/index",
+    "pages/interview/setup/index",
+    "pages/interview/prepare/index",
+    "pages/interview/chat/index",
+    "pages/interview/result/index",
+    "pages/interview/conversation/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

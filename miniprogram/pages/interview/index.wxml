@@ -11,57 +11,78 @@
   <scroll-view scroll-y class="page-content">
     <view class="container">
       
-      <view class="hero-card-base gradient-dark">
+      <!-- 暂停的面试 -->
+      <view wx:if="{{pausedInterview}}" class="hero-card-base gradient-orange" bindtap="continueInterview">
         <view class="hero-bg-overlay"></view>
         <view class="hero-content relative z-10">
           <view class="flex-between mb-3">
-            <view class="hero-tag-red">LIVE</view>
-            <view class="hero-time">30分钟后开始</view>
+            <view class="hero-tag-orange">暂停中</view>
+            <view class="hero-time">点击继续</view>
           </view>
           
           <view class="flex-row mb-3">
             <view class="company-logo-lg">
-              <text style="font-size: 48rpx;">🎵</text>
+              <text style="font-size: 48rpx;">⏸️</text>
             </view>
             <view class="ml-3">
-              <view class="title-md text-white">字节跳动</view>
-              <view class="sub-text text-white opacity-80">前端开发工程师 • 视频面试</view>
+              <view class="title-md text-white">{{pausedInterview.positionName}} • {{pausedInterview.level}}</view>
+              <view class="sub-text text-white opacity-80">已完成 {{pausedInterview.questionCount}} 题</view>
             </view>
           </view>
 
-          <button class="btn-hero-action">进入面试间</button>
+          <button class="btn-hero-action">继续面试</button>
+        </view>
+      </view>
+
+      <!-- 开始新面试 -->
+      <view wx:else class="hero-card-base gradient-dark">
+        <view class="hero-bg-overlay"></view>
+        <view class="hero-content relative z-10">
+          <view class="flex-between mb-3">
+            <view class="hero-tag-red">LIVE</view>
+            <view class="hero-time">随时开始</view>
+          </view>
+        
+          <view class="flex-row mb-3">
+            <view class="company-logo-lg">
+              <text style="font-size: 48rpx;">🎯</text>
+            </view>
+            <view class="ml-3">
+              <view class="title-md text-white">AI 模拟面试</view>
+              <view class="sub-text text-white opacity-80">真实场景 • 专业评价</view>
+            </view>
+          </view>
+
+          <button class="btn-hero-action" bindtap="enterInterview">开始新面试</button>
         </view>
       </view>
 
       <view class="flex-between mb-3 mt-4">
-        <text class="title-md">明日日程</text>
-        <text class="text-primary text-xs">全部日程 ></text>
+        <text class="title-md">历史记录</text>
+        <text class="text-primary text-xs" wx:if="{{interviewHistory.length > 0}}">全部记录 ></text>
       </view>
 
-      <view class="list-card" hover-class="hover-scale" style="animation-delay: 0.3s;">
+      <view wx:if="{{interviewHistory.length === 0}}" class="empty-hint">
+        <text class="empty-text">还没有面试记录</text>
+        <text class="empty-subtext">开始第一次模拟面试吧！</text>
+      </view>
+
+      <view wx:for="{{interviewHistory}}" wx:key="_id" 
+            class="list-card" 
+            hover-class="hover-scale" 
+            bindtap="viewHistory"
+            data-id="{{item._id}}"
+            style="animation-delay: {{0.3 + index * 0.1}}s;">
         <view class="flex-row">
           <view class="icon-box bg-orange-light">
-            <text>🛍️</text>
+            <text>{{item.positionIcon}}</text>
           </view>
           <view class="ml-3">
-            <view class="item-title">阿里巴巴</view>
-            <view class="sub-text">高级前端专家</view>
+            <view class="item-title">{{item.positionName}}</view>
+            <view class="sub-text">{{item.levelName}} • {{item.typeName}}</view>
           </view>
         </view>
-        <view class="time-badge">14:00</view>
-      </view>
-
-      <view class="list-card" hover-class="hover-scale" style="animation-delay: 0.4s;">
-        <view class="flex-row">
-          <view class="icon-box bg-blue-light">
-            <text>☁️</text>
-          </view>
-          <view class="ml-3">
-            <view class="item-title">腾讯云</view>
-            <view class="sub-text">全栈工程师</view>
-          </view>
-        </view>
-        <view class="time-badge">16:30</view>
+        <view class="time-badge">{{item.createTime}}</view>
       </view>
 
     </view>

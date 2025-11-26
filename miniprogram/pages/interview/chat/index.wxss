@@ -1,0 +1,281 @@
+.chat-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #F5F7FA;
+}
+
+/* 顶部导航 */
+.chat-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  color: #fff;
+}
+
+.interviewer-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.avatar-sm {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.interviewer-name {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.question-count {
+  font-size: 26rpx;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8rpx 20rpx;
+  border-radius: 100rpx;
+  backdrop-filter: blur(10px);
+}
+
+.btn-camera {
+  margin-left: 20rpx;
+  padding: 10rpx 20rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100rpx;
+  font-size: 28rpx;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.btn-camera:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.camera-icon {
+  display: block;
+}
+
+.btn-end {
+  margin-left: 20rpx;
+  padding: 12rpx 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+/* Camera preview */
+.camera-container {
+  position: fixed;
+  top: 200rpx;
+  right: 30rpx;
+  width: 200rpx;
+  height: 280rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transition: all 0.3s;
+}
+
+.camera-show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.camera-hide {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.camera-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.camera-tip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10rpx);
+  padding: 10rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+}
+
+/* 对话区域 */
+.chat-area {
+  flex: 1;
+  padding-bottom: 240rpx;
+}
+
+.messages-container {
+  padding: 150rpx 30rpx;
+}
+
+.message-wrapper {
+  margin-bottom: 32rpx;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16rpx;
+}
+
+.ai-message-row {
+  justify-content: flex-start;
+}
+
+.user-message-row {
+  justify-content: flex-end;
+}
+
+.msg-avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.msg-bubble {
+  max-width: 500rpx;
+  padding: 24rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-bubble {
+  background: #fff;
+  border-bottom-left-radius: 4rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  border-bottom-right-radius: 4rpx;
+  color: #fff;
+}
+
+.msg-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  word-wrap: break-word;
+  margin-bottom: 8rpx;
+}
+
+.user-bubble .msg-text {
+  color: #fff;
+}
+
+.msg-time {
+  font-size: 22rpx;
+  opacity: 0.6;
+  align-self: flex-end;
+}
+
+.bottom-spacer {
+  height: 200rpx;
+}
+
+/* 输入区域 */
+.input-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #fff;
+  padding: 20rpx 30rpx calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.input-box {
+  width: 100%;
+  min-height: 80rpx;
+  max-height: 200rpx;
+  background: #F5F7FA;
+  border: 2rpx solid #E5E7EB;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+}
+
+.input-box[disabled] {
+  opacity: 0.6;
+}
+
+.input-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-voice {
+  width: 88rpx;
+  height: 88rpx;
+  background: #F5F7FA;
+  border: 2rpx solid #E5E7EB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-voice.recording {
+  background: #FEE2E2;
+  border-color: #EF4444;
+  animation: pulse-recording 1s ease-in-out infinite;
+}
+
+@keyframes pulse-recording {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.voice-icon {
+  font-size: 36rpx;
+}
+
+.btn-send {
+  flex: 1;
+  margin-left: 20rpx;
+  height: 88rpx;
+  background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
+  color: #fff;
+  border-radius: 100rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-send[disabled] {
+  opacity: 0.5;
+}
+

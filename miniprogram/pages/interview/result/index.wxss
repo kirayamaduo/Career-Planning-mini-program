@@ -1,0 +1,349 @@
+.result-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #6366F1 0%, #F5F5F7 30%);
+}
+
+/* 顶部导航 */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  color: #fff;
+}
+
+.nav-back, .nav-right {
+  width: 80rpx;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+}
+
+.back-icon {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+/* 内容区域 */
+.result-content {
+  min-height: 100vh;
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+}
+
+.container {
+  padding: 40rpx 30rpx;
+}
+
+.loading-container {
+  padding: 200rpx 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #fff;
+}
+
+/* 分数卡片 */
+.score-card {
+  background: white;
+  border-radius: 24rpx;
+  padding: 50rpx 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(99, 102, 241, 0.15);
+  margin-bottom: 30rpx;
+}
+
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.score-main {
+  display: flex;
+  align-items: baseline;
+}
+
+.score-num {
+  font-size: 96rpx;
+  font-weight: bold;
+  color: #6366F1;
+}
+
+.score-total {
+  font-size: 40rpx;
+  color: #999;
+  margin-left: 8rpx;
+}
+
+.grade-badge {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+}
+
+.grade-badge.grade-A {
+  background: linear-gradient(135deg, #10B981, #34D399);
+}
+
+.grade-badge.grade-B {
+  background: linear-gradient(135deg, #3B82F6, #60A5FA);
+}
+
+.grade-badge.grade-C {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+}
+
+.grade-badge.grade-D {
+  background: linear-gradient(135deg, #EF4444, #F87171);
+}
+
+.grade-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.grade-label {
+  font-size: 22rpx;
+  color: white;
+  opacity: 0.9;
+  margin-top: 4rpx;
+}
+
+.score-desc {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+}
+
+/* 卡片通用样式 */
+.dimensions-card,
+.feedback-card,
+.suggestions-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.title-icon {
+  font-size: 40rpx;
+  margin-right: 12rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+/* 能力维度 */
+.dimensions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+
+.dimension-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.dimension-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.dimension-name {
+  font-size: 28rpx;
+  color: #374151;
+  font-weight: 600;
+}
+
+.dimension-score {
+  font-size: 28rpx;
+  color: #6366F1;
+  font-weight: bold;
+}
+
+.dimension-bar {
+  width: 100%;
+  height: 16rpx;
+  background: #E5E7EB;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.dimension-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+  border-radius: 8rpx;
+  transition: width 0.6s ease;
+}
+
+/* 点评文本 */
+.feedback-text {
+  font-size: 28rpx;
+  color: #4B5563;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* 建议列表 */
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.suggestion-item {
+  display: flex;
+  gap: 20rpx;
+}
+
+.suggestion-bullet {
+  width: 48rpx;
+  height: 48rpx;
+  background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+  color: #6366F1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.suggestion-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #4B5563;
+  line-height: 1.8;
+}
+
+/* 底部占位 */
+.bottom-placeholder {
+  height: 80rpx;
+}
+
+/* 底部按钮 */
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 20rpx 30rpx calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-secondary,
+.btn-primary {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 100rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary {
+  background: #fff;
+  border: 2rpx solid #6366F1;
+  color: #6366F1;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
+  color: #fff;
+  box-shadow: 0 8rpx 20rpx rgba(79, 70, 229, 0.3);
+}
+
+.btn-secondary:active,
+.btn-primary:active {
+  opacity: 0.9;
+  transform: translateY(2rpx);
+}
+
+/* 对话查看卡片 */
+.conversation-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.conversation-icon {
+  width: 88rpx;
+  height: 88rpx;
+  background: #EEF2FF;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.conversation-text {
+  flex: 1;
+}
+
+.conversation-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 6rpx;
+}
+
+.conversation-desc {
+  font-size: 24rpx;
+  color: #6B7280;
+}
+
+.arrow-icon {
+  font-size: 48rpx;
+  color: #9CA3AF;
+  flex-shrink: 0;
+}
+

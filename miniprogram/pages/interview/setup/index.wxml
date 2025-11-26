@@ -1,0 +1,90 @@
+<view class="setup-page">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header" style="padding-top: {{statusBarHeight}}px; height: {{navHeight}}px;">
+    <view class="nav-back" bindtap="handleBack">
+      <text class="back-icon">❮</text>
+    </view>
+    <view class="nav-title">面试设置</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view scroll-y class="setup-content" style="padding-top: {{navHeight + 20}}px;">
+    <view class="container">
+      
+      <!-- 选择目标岗位 -->
+      <view class="section">
+        <view class="section-title">选择目标岗位</view>
+        <view class="position-grid">
+          <view wx:for="{{positions}}" wx:key="id"
+                class="position-card {{selectedPosition === item.id ? 'active' : ''}}"
+                bindtap="selectPosition"
+                data-id="{{item.id}}">
+            <text class="position-icon">{{item.icon}}</text>
+            <text class="position-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 选择难度等级 -->
+      <view class="section">
+        <view class="section-title">选择难度等级</view>
+        <view class="level-tabs">
+          <view wx:for="{{levels}}" wx:key="*this"
+                class="level-tab {{selectedLevel === item ? 'active' : ''}}"
+                bindtap="selectLevel"
+                data-level="{{item}}">
+            {{item}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 面试类型 -->
+      <view class="section">
+        <view class="section-title">面试轮次</view>
+        <view class="type-list">
+          <view wx:for="{{types}}" wx:key="id"
+                class="type-card {{selectedType === item.id ? 'active' : ''}}"
+                bindtap="selectType"
+                data-id="{{item.id}}">
+            <view class="type-name">{{item.name}}</view>
+            <view class="type-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 面试模式 -->
+      <view class="section">
+        <view class="section-title">
+          <text>面试模式</text>
+          <text class="section-subtitle">选择适合你的训练方式</text>
+        </view>
+        <view class="mode-list">
+          <view wx:for="{{modes}}" wx:key="id"
+                class="mode-card {{selectedMode === item.id ? 'active' : ''}}"
+                bindtap="selectMode"
+                data-id="{{item.id}}">
+            <view class="mode-header">
+              <text class="mode-icon">{{item.icon}}</text>
+              <view class="mode-name">{{item.name}}</view>
+              <view class="mode-badge" wx:if="{{item.recommended}}">推荐</view>
+            </view>
+            <view class="mode-desc">{{item.desc}}</view>
+            <view class="mode-features">
+              <text wx:for="{{item.features}}" wx:key="*this" wx:for-item="feature" class="feature-tag">{{feature}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 底部占位 -->
+      <view class="bottom-placeholder"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-actions">
+    <button class="btn-start" bindtap="startInterview">开始面试</button>
+  </view>
+</view>
+

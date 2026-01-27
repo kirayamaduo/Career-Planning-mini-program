@@ -1,5 +1,6 @@
 # AI 职业规划小程序
-<img width="306" height="661" alt="image" src="https://github.com/user-attachments/assets/ca5b9b72-7cec-4935-981b-63b3dd8b40d1" />
+<img width="306" height="661" alt="image" src="https://github.com/user-attachments/assets/ca5b9b72-7cec-4935-981b-63b3dd8b40d1" /><img width="318" height="665" alt="image" src="https://github.com/user-attachments/assets/4248a918-4bdd-484b-a02d-4286346b2d85" />
+
 
 ## 1. 项目简介
 

@@ -1,5 +1,6 @@
 # AI 职业规划小程序
-<img width="306" height="661" alt="image" src="https://github.com/user-attachments/assets/ca5b9b72-7cec-4935-981b-63b3dd8b40d1" /><img width="318" height="665" alt="image" src="https://github.com/user-attachments/assets/4248a918-4bdd-484b-a02d-4286346b2d85" /><img width="307" height="662" alt="image" src="https://github.com/user-attachments/assets/69c2178d-18e2-47cc-93f4-e622e7de0a3b" /><img width="318" height="667" alt="image" src="https://github.com/user-attachments/assets/9ccc20e3-8016-4f06-8972-d1a7c314534c" />![Uploading image.png…]()
+<img width="306" height="661" alt="image" src="https://github.com/user-attachments/assets/ca5b9b72-7cec-4935-981b-63b3dd8b40d1" /><img width="318" height="665" alt="image" src="https://github.com/user-attachments/assets/4248a918-4bdd-484b-a02d-4286346b2d85" /><img width="307" height="662" alt="image" src="https://github.com/user-attachments/assets/69c2178d-18e2-47cc-93f4-e622e7de0a3b" /><img width="318" height="667" alt="image" src="https://github.com/user-attachments/assets/9ccc20e3-8016-4f06-8972-d1a7c314534c" /><img width="310" height="667" alt="image" src="https://github.com/user-attachments/assets/ded0c80c-84f3-4266-88a9-79c9eb9d92f9" />
+
 
 
 
